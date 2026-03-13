@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block style %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/search.css')}}">
+{% endblock %}
+
+{% block main %}
+<div class="cards-container">
+
+    <!-- CARDS HEADING + FILTER -->
+    <h1 class="cards-heading">
+        <span>Kết quả tìm kiếm: {{ query }}</span>
+        <div class="dropdown-wrapper">
+            <img id="filterTrigger" class="dropdown-trigger-click" data-dropdown="filterMenu" 
+                 src="{{url_for('static',filename='images/icons/filter_icon.png')}}" alt="filter"/>
+
+            <div id="filterMenu" class="dropdown">
+                <form method="GET" action="{{url_for('main.search')}}" autocomplete="off">
+
+                    <!-- Lưu kết quả tìm kiếm từ header -->
+                    <input type="hidden" name="query" value="{{ query }}">
+            
+                    <!-- Locations -->
+                    <div class="location-filter">
+                        <span class="filter-element-heading">Khu vực:</span>
+                        <span>
+                            <select name="location">
+                                <option value="">Toàn quốc</option>
+                                {% for loc in locations %}
+                                <option value="{{ loc }}" {% if location == loc %}selected{% endif %}>
+                                        {{ loc }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </span>
+                    </div>
+                    <hr>
+
+                    <!-- Date -->
+                    <div class="date-filter">
+                        <span class="filter-element-heading">Ngày:</span>
+                        <input type="date" name="date" value="{{ date }}">
+                    </div>
+                    <hr>
+
+                    <!-- Categories -->
+                    <div class="category-filter">
+                        <p class="filter-element-heading">Thể Loại:</p>
+                        {% for cat in categories %}
+                        <label class="category-checkbox">
+                            <input
+                                type="checkbox"
+                                name="category"
+                                value="{{ cat }}"
+                                {% if cat in selected_categories %}checked{% endif %}
+                            >
+                            {{ cat }}
+                        </label>
+                        {% endfor %}
+                    </div>
+                    <hr>
+                    
+                    <!-- Price range -->
+                    <div class="price-filter">
+                        <p class="filter-element-heading">Giá tiền:</p>
+                        <div class="slider-container">
+
+                            <!-- Slider track -->
+                            <div class="slider-track"></div>
+
+                            <!-- Price max -->
+                            <input 
+                                type="range" id="priceMin" name="priceMin" 
+                                min="0" max="{{ price_ceiling }}" 
+                                value="{{ priceMin or 0}}"
+                            >
+
+                            <!-- Price max -->
+                            <input 
+                                type="range" id="priceMax" name="priceMax" 
+                                min="0" max="{{ price_ceiling }}" 
+                                value="{{ priceMax if (priceMax is not none) else price_ceiling }}"
+                            >
+                        </div>
+            
+                        <div class="price-display">
+                            <span id="priceMinValue"></span>
+                            <span> - </span>
+                            <span id="priceMaxValue"></span>
+                        </div>
+                    </div>
+                    <hr>
+
+                    <div class="filter-buttons">
+                        <a href="{{ url_for('main.search', query=query) }}">
+                            <button type="button" class="reset-button">Reset</button>
+                        </a>
+                        <button type="submit" class="filter-button">Lọc</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </h1>
+
+    <!-- CARDS -->
+    <div id="search" class="cards"></div>
+</div>
+{% endblock %}
+
+<!--SCRIPTS -->
+{% block scripts %}
+    <script type="module">
+        import { renderSearchResults, initPriceSlider } from "{{ url_for('static', filename='js/search.js') }}";
+
+        const results = {{ search_results | tojson }};
+
+        renderSearchResults(results);
+        initPriceSlider();
+    </script>
+
+    <script type="module" src="{{ url_for('static', filename='js/modules/dropdownclick.js') }}"></script>
+{% endblock %}

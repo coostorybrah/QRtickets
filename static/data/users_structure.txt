@@ -1,0 +1,13 @@
+{
+    "users": [
+        {
+            "id": number,          // Unique user ID
+            "username": string,    // Account username
+            "password": string,    // User password
+            "avatar": string,      // Path or URL to the user's avatar image
+            "email": string,       // User email address
+            "tickets": [number],   // List of ticket IDs owned by the user
+            "events": [string]     // List of event IDs the user is attending or has interacted with
+        }
+    ]
+}

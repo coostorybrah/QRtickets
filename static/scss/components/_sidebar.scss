@@ -1,0 +1,36 @@
+// USE
+@use '_reset' as *;
+@use '_variables' as *;
+
+// COLOR VARIABLES
+
+// SIZE VARIABLES
+$sidebar_width: 200px;
+
+// SIDEBAR
+.container{
+    display: flex;
+}
+
+.sidebar{
+    width:$sidebar_width;
+    height:100vh;
+    background:#333;
+    padding:20px;
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    padding:10px 0;
+}
+
+.sidebar a:hover{
+    background:#444;
+}
+
+.content{
+    flex:1;
+    padding:20px;
+}

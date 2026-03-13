@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/vecuatoi.css">
+    <title>QRticket - Vé của tôi</title>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <!-- LOGO -->
+        <div class="logo">
+            <a href="/trangchu.html" title="QRticket">
+                <img src="/static/images/icons/logo.png" alt="QRticket">
+            </a>
+        </div>
+
+        <!-- TÌM KIẾM -->
+        <div class="search_bar wrapper">
+            <form action="/search_results" class="wrapper" method="GET">
+                <input type="text" name="query" placeholder="Tìm kiếm...">
+                <button type="submit">
+                    <img src="/static/images/icons/search_icon.png" alt="Search">
+                </button>
+            </form>
+        </div>
+        
+        <!-- SỰ KIỆN & VÉ -->
+        <div class="others">
+            <a class="eventManager wrapper" href="sukiencuatoi.html">Tạo sự kiện</a>
+
+            <a class="ticketManager wrapper" href="vecuatoi.html">Vé của tôi</a>
+    
+            <!-- LOGIN / SIGN-UP TRIGGER -->
+            <div class="wrapper others__modalTrigger">
+                <button type="button" class="modalTrigger--login" data-open="mdl-login">
+                    Đăng nhập / Đăng ký
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="sidebar">
+            <div class="tab">
+                <button type="button" class="tabTrigger">
+                    Tất cả
+                </button>                
+            </div>
+
+            <div class="tab">
+                <button type="button" class="tabTrigger">
+                    Thành công
+                </button>      
+            </div>
+
+            <div class="tab">
+                <button type="button" class="tabTrigger">
+                    Đang xử lý
+                </button>                
+            </div>
+
+            <div class="tab">
+                <button type="button" class="tabTrigger" id="">
+                    Đã hủy
+                </button>                
+            </div>
+        </div>
+
+        <div>
+            
+        </div>
+    </main>
+
+
+    <!-- LOGIN MODAL -->
+    <div id="mdl-login" class="modal">
+        <div class="modal-content">
+            <div class="login__header">
+                <button class="close" data-close="mdl-login">&times;</button>
+                <h1>ĐĂNG NHẬP</h1>
+            </div>
+
+            <div class="login__body">
+                <form action="/login" method="POST" class="login">
+                    <input name="username" type="text" placeholder="Email hoặc số điện thoại" required>
+                    <input name="password" type="password" placeholder="Mật khẩu" required>
+                    <button type="submit" class="login__button">
+                        Đăng nhập
+                    </button>
+                </form>
+                <button type="button" class="modalTrigger--signUp" data-open="mdl-signUp">
+                    Chưa có tài khoản?
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SIGN-UP MODAL -->
+    <div id="mdl-signUp" class="modal">
+        <div class="modal-content">
+            <div class="login__header">
+                <button class="close" data-close="mdl-signUp">&times;</button>
+                <h1>ĐĂNG KÝ</h1>
+            </div>
+
+            <div class="login__body">
+                <form action="/signUp" method="POST" class="login">
+                    <input name="username" type="text" placeholder="Email hoặc số điện thoại" required>
+                    <input name="password" type="password" placeholder="Mật khẩu" required>
+                    <input name="password_confirm" type="password" placeholder="Nhập lại mật khẩu" required>
+                    <button type="submit" class="login__button">Đăng ký</button>
+                </form>
+                <button type="button" class="modalTrigger--signUp" data-open="mdl-login">Đã có tài khoản?</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script type="module" src="/static/js/auth.js"></script>
+    <script type="module" src="/static/js/vecuatoi.js"></script>
+
+</body>
+</html>

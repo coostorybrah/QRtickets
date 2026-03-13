@@ -1,0 +1,75 @@
+// USE
+@use '_variables' as v;
+
+// COLOR VARIABLES
+$trigger_inactive_color: v.$header_bg_color;
+$trigger_active_color: v.$btn_active_color;
+
+// SIZE VARIABLES
+$dropdown_width: 220px;
+$trigger_height: 50px;
+$trigger_max_height : 96px;
+
+// WRAPPER (positions dropdown correctly)
+.dropdown-wrapper {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+// TRIGGER
+.dropdown-trigger-click {
+    background: $trigger_inactive_color;
+
+    padding: 10px;
+    height: $trigger_height;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    &:hover {
+        background: $trigger_active_color;
+    }
+    
+    &.active {
+       background: $trigger_active_color; 
+    }
+}
+
+// DROPDOWN PANEL
+.dropdown {
+    background: white;
+    color: black;
+    
+    width: $dropdown_width;
+    
+    position: absolute;
+    top: 110%;
+
+    border-radius: 6px;
+    overflow: hidden;
+
+    display: none;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+
+    z-index: 100;
+}
+
+.dropdown.open {
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+}

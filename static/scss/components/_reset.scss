@@ -1,0 +1,28 @@
+// USE
+@use '_variables' as v;
+
+// RESET
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+// BODY
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: whitesmoke;
+    background-color: v.$body_bg_color;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+// BASE WRAPPER
+.wrapper{
+    margin-top: v.$margin_small_tb;
+    margin-right: v.$margin_small_lr;
+    margin-bottom: v.$margin_small_tb;
+    margin-left: v.$margin_small_lr;
+}

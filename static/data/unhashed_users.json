@@ -1,0 +1,41 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "username": "admin",
+            "password": "password123",
+            "avatar": "/static/images/avatars/default-avatar.png",
+            "email": "admin@gmail.com",
+            "tickets": [],
+            "events": []
+        },
+        {
+            "id": 2,
+            "username": "CharlieCharlieKirky",
+            "password": "ijustpoppedaperky",
+            "avatar": "/static/images/avatars/serious-kirk.png",
+            "email": "wetneck@gmail.com",
+            "tickets": [],
+            "events": []
+        },
+        {
+            "id": 3,
+            "username": "diddy",
+            "password": "babyoil123",
+            "avatar": "/static/images/avatars/default-avatar.png",
+            "email": "funparty@gmail.com",
+            "tickets": [],
+            "events": []
+        },
+        {
+            "id": 4,
+            "username": "epstein",
+            "password": "dreamisland",
+            "avatar": "/static/images/avatars/default-avatar.png",
+            "email": "sweetlittledesserts@gmail.com",
+            "tickets": [],
+            "events": []
+        }
+
+    ]
+}

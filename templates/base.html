@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block style %}
+    {% endblock %}
+
+    {% block title %} 
+        <title>QRticket</title>
+    {% endblock %}
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <!-- LOGO -->
+        <div class="logo">
+            <a href="{{url_for('main.trangchu')}}" title="QRticket">
+                <img src="{{url_for('static',filename='images/icons/logo.png')}}" alt="QRticket">
+            </a>
+        </div>
+
+        <!-- TÌM KIẾM -->
+        <div class="search_bar wrapper">
+            <form action="{{ url_for('main.search') }}" class="wrapper" method="GET">
+                <input type="text" name="query" placeholder="Tìm kiếm...">
+                <button type="submit">
+                    <img src="{{url_for('static',filename='images/icons/search_icon.png')}}" alt="Search icon">
+                </button>
+            </form>
+        </div>
+        
+        <!-- SỰ KIỆN & VÉ -->
+        <div class="others">
+
+            <a class="eventManager wrapper" href="{{url_for('main.sukiencuatoi')}}">Tạo sự kiện</a>
+
+            <a class="ticketManager wrapper" href="{{url_for('main.vecuatoi')}}">Vé của tôi</a>
+    
+            <!-- AUTHENTICATION -->
+            <div class="auth">
+
+                <!-- GUEST -->
+                <div id="guestUI" class="wrapper modalTrigger">
+                    <button type="button" class="modalTrigger--login" data-open="mdl-login">
+                        Đăng nhập / Đăng ký
+                    </button>
+                </div>
+
+                <!-- USER -->
+                <div id="userMenu" class="dropdownHover">
+
+                    <a id="userWrapper" href="{{url_for('main.userpage')}}">
+                        <img id="avatar" src="" alt="avatar">
+                        <span id="avatarText">Tài khoản</span>
+                    </a>
+
+                    <div class="dropdown">
+                        <a href="{{url_for('main.vecuatoi')}}">Vé của tôi</a>
+                        <a href="{{url_for('main.sukiencuatoi')}}">Sự kiện của tôi</a>
+                        <a href="{{url_for('main.userpage')}}">Tài khoản của tôi</a>
+                        <a href="{{url_for('auth.logout')}}">Đăng xuất</a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <main>
+        {% block main %}{% endblock %}
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        {% block footer %} {% endblock %}
+    </footer>
+
+    <!-- LOGIN MODAL -->
+    <div id="mdl-login" class="modal">
+        <div class="modal-content login">
+            <div class="login__header">
+                <button class="close" data-close="mdl-login">&times;</button>
+                <h1>ĐĂNG NHẬP</h1>
+            </div>
+
+            <div class="login__body">
+                <form class="login" id="login-form">
+                    <input name="username" type="text" placeholder="Email hoặc số điện thoại" required>
+                    <input name="password" type="password" placeholder="Mật khẩu" required>
+                    <button type="submit" class="login__button">
+                        Đăng nhập
+                    </button>
+                </form>
+
+                <button type="button" class="modalTrigger--signUp" data-open="mdl-signUp">
+                    Chưa có tài khoản?
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- SIGN-UP MODAL -->
+    <div id="mdl-signUp" class="modal">
+        <div class="modal-content login">
+            <div class="login__header">
+                <button class="close" data-close="mdl-signUp">&times;</button>
+                <h1>ĐĂNG KÝ</h1>
+            </div>
+
+            <div class="login__body">
+                <form class="login" id="signUp-form">
+                    <input name="username" type="text" placeholder="Nhập username" required>
+                    <input name="email" type="text" placeholder="Email" required>
+                    <input name="password" type="password" placeholder="Mật khẩu" required>
+                    <input name="password_confirm" type="password" placeholder="Nhập lại mật khẩu" required>
+
+                    <button type="submit" class="login__button">
+                        Đăng ký
+                    </button>
+                </form>
+
+                <button type="button" class="modalTrigger--signUp" data-open="mdl-login">
+                    Đã có tài khoản?
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+
+    {% block endOfBody %} {% endblock %}
+
+    <!-- SCRIPTS-->
+    <script type="module">
+        const currentUser = {{ currentUser | tojson }};
+        
+        import { initLogin, initSignUp, showUserUI } from "{{url_for('static', filename='js/modules/auth.js')}}";
+
+        initLogin();
+        initSignUp();
+
+        if (currentUser){
+            showUserUI(currentUser.avatar);
+        }
+    </script>
+    
+    <script type="module" src="{{url_for('static',filename='js/modules/modal.js')}}"></script>
+
+    {% block scripts %}
+    {% endblock %}
+</body>
+</html>

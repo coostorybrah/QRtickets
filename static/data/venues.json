@@ -1,0 +1,151 @@
+{
+  "mydinh-stadium": {
+    "id": "mydinh-stadium",
+    "name": "Sân Vận Động Quốc Gia Mỹ Đình",
+    "address": "Số 1 Lê Đức Thọ, Mỹ Đình 1, Nam Từ Liêm",
+    "city": "Hà Nội",
+    "country": "Vietnam",
+    "capacity": 40000,
+    "createdAt": "2025-01-01"
+  },
+
+  "vinhome-oceanpark3": {
+    "id": "vinhome-oceanpark3",
+    "name": "Vinhome Ocean Park 3",
+    "address": "Nghĩa Trụ",
+    "city": "Hưng Yên",
+    "country": "Vietnam",
+    "capacity": 20000,
+    "createdAt": "2025-01-01"
+  },
+
+  "nhahat-hoabinh": {
+    "id": "nhahat-hoabinh",
+    "name": "Nhà hát Hòa Bình",
+    "address": "Quận 10",
+    "city": "TP.HCM",
+    "country": "Vietnam",
+    "capacity": 2400,
+    "createdAt": "2025-01-01"
+  },
+
+  "dalat-opera-house": {
+    "id": "dalat-opera-house",
+    "name": "Da Lat Opera House",
+    "address": "Lâm Viên",
+    "city": "Đà Lạt",
+    "country": "Vietnam",
+    "capacity": 1500,
+    "createdAt": "2025-01-01"
+  },
+
+  "svd-quankhu7": {
+    "id": "svd-quankhu7",
+    "name": "SVĐ Quân Khu 7",
+    "address": "Hoàng Văn Thụ",
+    "city": "TP.HCM",
+    "country": "Vietnam",
+    "capacity": 25000,
+    "createdAt": "2025-01-01"
+  },
+
+  "idecaf-stage": {
+    "id": "idecaf-stage",
+    "name": "Sân khấu Idecaf",
+    "address": "Lê Thánh Tôn, Quận 1",
+    "city": "TP.HCM",
+    "country": "Vietnam",
+    "capacity": 500,
+    "createdAt": "2025-01-01"
+  },
+
+  "cu-chi-tunnels": {
+    "id": "cu-chi-tunnels",
+    "name": "Di tích Địa Đạo Củ Chi",
+    "address": "Củ Chi",
+    "city": "TP.HCM",
+    "country": "Vietnam",
+    "capacity": 1000,
+    "createdAt": "2025-01-01"
+  },
+
+  "bac-center": {
+    "id": "bac-center",
+    "name": "BAC Center",
+    "address": "Quận 1",
+    "city": "TP.HCM",
+    "country": "Vietnam",
+    "capacity": 300,
+    "createdAt": "2025-01-01"
+  },
+
+  "jw-marriott-saigon": {
+    "id": "jw-marriott-saigon",
+    "name": "JW Marriott Hotel & Suites Saigon",
+    "address": "Quận 1",
+    "city": "TP.HCM",
+    "country": "Vietnam",
+    "capacity": 800,
+    "createdAt": "2025-01-01"
+  },
+
+  "dreamplex-q4": {
+    "id": "dreamplex-q4",
+    "name": "Dreamplex",
+    "address": "Quận 4",
+    "city": "TP.HCM",
+    "country": "Vietnam",
+    "capacity": 250,
+    "createdAt": "2025-01-01"
+  },
+
+  "bat-trang-village": {
+    "id": "bat-trang-village",
+    "name": "Xưởng Gốm Bát Tràng",
+    "address": "Gia Lâm",
+    "city": "Hà Nội",
+    "country": "Vietnam",
+    "capacity": 150,
+    "createdAt": "2025-01-01"
+  },
+
+  "hoan-kiem-lake": {
+    "id": "hoan-kiem-lake",
+    "name": "Hồ Hoàn Kiếm",
+    "address": "Hoàn Kiếm",
+    "city": "Hà Nội",
+    "country": "Vietnam",
+    "capacity": 10000,
+    "createdAt": "2025-01-01"
+  },
+
+  "tay-ho-gymnasium": {
+    "id": "tay-ho-gymnasium",
+    "name": "NTD Tây Hồ",
+    "address": "Tây Hồ",
+    "city": "Hà Nội",
+    "country": "Vietnam",
+    "capacity": 3500,
+    "createdAt": "2025-01-01"
+  },
+
+  "quan-ngua-stadium": {
+    "id": "quan-ngua-stadium",
+    "name": "NTD Quần Ngựa",
+    "address": "Ba Đình",
+    "city": "Hà Nội",
+    "country": "Vietnam",
+    "capacity": 3000,
+    "createdAt": "2025-01-01"
+  },
+
+  "thiso-mall-sala": {
+    "id": "thiso-mall-sala",
+    "name": "Thiso Mall Sala",
+    "address": "Quận 2",
+    "city": "TP.HCM",
+    "country": "Vietnam",
+    "capacity": 1500,
+    "createdAt": "2025-01-01"
+  }
+}
