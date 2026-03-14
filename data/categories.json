@@ -1,0 +1,61 @@
+{
+  "nhac-song": {
+    "id": "nhac-song",
+    "name": "Nhạc sống",
+    "slug": "nhac-song",
+    "description": "Các chương trình ca nhạc, concert, liveshow và biểu diễn âm nhạc trực tiếp.",
+    "icon": "music",
+    "color": "#ff4d4f",
+    "createdAt": "2025-01-01"
+  },
+
+  "the-thao": {
+    "id": "the-thao",
+    "name": "Thể thao",
+    "slug": "the-thao",
+    "description": "Các sự kiện thể thao chuyên nghiệp, giải đấu và hoạt động thể thao trải nghiệm.",
+    "icon": "trophy",
+    "color": "#1890ff",
+    "createdAt": "2025-01-01"
+  },
+
+  "san-khau-nghe-thuat": {
+    "id": "san-khau-nghe-thuat",
+    "name": "Sân khấu - Nghệ thuật",
+    "slug": "san-khau-nghe-thuat",
+    "description": "Kịch nói, hài kịch, biểu diễn nghệ thuật và các chương trình sân khấu.",
+    "icon": "theater",
+    "color": "#722ed1",
+    "createdAt": "2025-01-01"
+  },
+
+  "tham-quan-trai-nghiem": {
+    "id": "tham-quan-trai-nghiem",
+    "name": "Tham quan - Trải nghiệm",
+    "slug": "tham-quan-trai-nghiem",
+    "description": "Các tour tham quan, hoạt động trải nghiệm và du lịch khám phá.",
+    "icon": "map",
+    "color": "#13c2c2",
+    "createdAt": "2025-01-01"
+  },
+
+  "hoi-thao-workshop": {
+    "id": "hoi-thao-workshop",
+    "name": "Hội thảo - Workshop",
+    "slug": "hoi-thao-workshop",
+    "description": "Các buổi hội thảo, khóa học, workshop chia sẻ kiến thức và kỹ năng.",
+    "icon": "presentation",
+    "color": "#faad14",
+    "createdAt": "2025-01-01"
+  },
+
+  "khac": {
+    "id": "khac",
+    "name": "Khác",
+    "slug": "khac",
+    "description": "Các sự kiện đặc biệt hoặc không thuộc các nhóm chính.",
+    "icon": "star",
+    "color": "#8c8c8c",
+    "createdAt": "2025-01-01"
+  }
+}

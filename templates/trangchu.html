@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/trangchu.css' %}">
+{% endblock %}
+
+{% block title %}
+<title>QRticket - Trang chủ</title>
+{% endblock %}
+
+{% block main %}
+
+<!-- NHẠC SỐNG -->
+<div class="cards-container">
+    <h3 class="cards-heading">NHẠC SỐNG</h3>
+    <div class="cards" id="nhac-song"></div>
+</div>
+
+<!-- SÂN KHẤU -->
+<div class="cards-container">
+    <h3 class="cards-heading">SÂN KHẤU & NGHỆ THUẬT</h3>
+    <div class="cards" id="san-khau-nghe-thuat"></div>
+</div>
+
+<!-- HỘI THẢO -->
+<div class="cards-container">
+    <h3 class="cards-heading">HỘI THẢO & WORKSHOP</h3>
+    <div class="cards" id="hoi-thao-workshop"></div>
+</div>
+
+<!-- THAM QUAN -->
+<div class="cards-container">
+    <h3 class="cards-heading">THAM QUAN & TRẢI NGHIỆM</h3>
+    <div class="cards" id="tham-quan-trai-nghiem"></div>
+</div>
+
+<!-- THỂ THAO -->
+<div class="cards-container">
+    <h3 class="cards-heading">THỂ THAO</h3>
+    <div class="cards" id="the-thao"></div>
+</div>
+
+<!-- KHÁC -->
+<div class="cards-container">
+    <h3 class="cards-heading">KHÁC</h3>
+    <div class="cards" id="khac"></div>
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+    <script type="module" src="{% static 'js/trangchu.js' %}"></script>
+{% endblock %}

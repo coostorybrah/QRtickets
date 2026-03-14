@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/chitietsukien.css' %}">
+{% endblock %}
+
+{% block title %}
+<title>QRticket - Chi tiết sự kiện</title>
+{% endblock %}
+
+{% block main %}
+
+<!-- BANNER -->
+<div class="banner">
+
+    <div class="banner__info">
+
+        <div class="text">
+            <h1 id="tenSuKien"></h1>
+
+            <div class="details">
+                <p>
+                    Thời gian: <br>
+                    <span id="displayDate" class="date"></span>
+                    <span id="startTime" class="time"></span>
+                    <span id="endTime" class="time"></span>
+                </p>
+
+                <p>
+                    Địa điểm:<br>
+                    <span id="diaChiTen"></span>
+                </p>
+
+                <p id="diaChiCuThe"></p>
+            </div>
+        </div>
+
+        <div class="price">
+            <hr>
+            <p>Giá từ: <span id="giaVe"></span></p>
+            <button type="button">Mua vé ngay</button>
+        </div>
+
+    </div>
+
+    <div class="banner__image">
+        <img id="anhBanner" src="" alt="Ảnh sự kiện">
+    </div>
+
+</div>
+
+<!-- EVENT DETAILS -->
+<div class="event">
+
+    <div class="tickets">
+
+        <h1>THÔNG TIN VÉ</h1>
+
+        <div class="tickets__details">
+
+            <table id="bangGiaVe">
+            </table>
+
+            <div class="footnote">
+                * Lưu ý: Giá trên đã bao gồm thuế VAT.
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="description">
+
+        <h1>CHI TIẾT SỰ KIỆN</h1>
+
+        <div id="moTa"></div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script>
+const event_id = "{{ event_id }}";
+</script>
+
+<script type="module" src="{% static 'js/chitietsukien.js' %}"></script>
+
+{% endblock %}

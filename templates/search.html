@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/search.css' %}">
+{% endblock %}
+
+{% block main %}
+<div class="cards-container">
+
+    <!-- CARDS HEADING + FILTER -->
+    <h1 class="cards-heading">
+        <span>Kết quả tìm kiếm: {{ query }}</span>
+
+        <div class="dropdown-wrapper">
+
+            <img
+                id="filterTrigger"
+                class="dropdown-trigger-click"
+                data-dropdown="filterMenu"
+                src="{% static 'images/icons/filter_icon.png' %}"
+                alt="filter"
+            />
+
+            <div id="filterMenu" class="dropdown">
+
+                <form method="GET" action="{% url 'search' %}" autocomplete="off">
+
+                    <!-- Keep header search -->
+                    <input type="hidden" name="query" value="{{ query }}">
+
+                    <!-- Location -->
+                    <div class="location-filter">
+
+                        <span class="filter-element-heading">Khu vực:</span>
+
+                        <span>
+                            <select name="location">
+
+                                <option value="">Toàn quốc</option>
+
+                                {% for loc in locations %}
+                                <option value="{{ loc }}" {% if location == loc %}selected{% endif %}>
+                                    {{ loc }}
+                                </option>
+                                {% endfor %}
+
+                            </select>
+                        </span>
+
+                    </div>
+
+                    <hr>
+
+                    <!-- Date -->
+                    <div class="date-filter">
+
+                        <span class="filter-element-heading">Ngày:</span>
+
+                        <input type="date" name="date" value="{{ date }}">
+
+                    </div>
+
+                    <hr>
+
+                    <!-- Categories -->
+                    <div class="category-filter">
+
+                        <p class="filter-element-heading">Thể Loại:</p>
+
+                        {% for cat in categories %}
+                        <label class="category-checkbox">
+
+                            <input
+                                type="checkbox"
+                                name="category"
+                                value="{{ cat }}"
+                                {% if cat in selected_categories %}checked{% endif %}
+                            >
+
+                            {{ cat }}
+
+                        </label>
+                        {% endfor %}
+
+                    </div>
+
+                    <hr>
+
+                    <!-- Price -->
+                    <div class="price-filter">
+
+                        <p class="filter-element-heading">Giá tiền:</p>
+
+                        <div class="slider-container">
+
+                            <div class="slider-track"></div>
+
+                            <input
+                                type="range"
+                                id="priceMin"
+                                name="priceMin"
+                                min="0"
+                                max="{{ price_ceiling }}"
+                                value="{{ priceMin|default:0 }}"
+                            >
+
+                            <input
+                                type="range"
+                                id="priceMax"
+                                name="priceMax"
+                                min="0"
+                                max="{{ price_ceiling }}"
+                                value="{{ priceMax|default:price_ceiling }}"
+                            >
+
+                        </div>
+
+                        <div class="price-display">
+                            <span id="priceMinValue"></span>
+                            <span> - </span>
+                            <span id="priceMaxValue"></span>
+                        </div>
+
+                    </div>
+
+                    <hr>
+
+                    <div class="filter-buttons">
+
+                        <a href="{% url 'search' %}?query={{ query }}">
+                            <button type="button" class="reset-button">Reset</button>
+                        </a>
+
+                        <button type="submit" class="filter-button">
+                            Lọc
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+    </h1>
+
+    <!-- RESULTS -->
+    <div id="search" class="cards"></div>
+
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+
+<script type="module">
+
+import { renderSearchResults, initPriceSlider } from "{% static 'js/search.js' %}";
+
+const results = {{ search_results|safe }};
+
+renderSearchResults(results);
+initPriceSlider();
+
+</script>
+
+<script type="module" src="{% static 'js/modules/dropdownclick.js' %}"></script>
+
+{% endblock %}

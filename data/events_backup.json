@@ -1,0 +1,558 @@
+{
+    "atsh": {
+        "ten": "ANH TRAI \"SAY HI\" 2025 CONCERT - ĐÊM 2",
+        "categories": ["nhac-song"],
+        "anh": "/static/images/nhac-song/ATSH.png",
+        "date": "2026-03-14",
+        "displayDate": "14.03.2026",
+        "startTime": "12:00",
+        "endTime": "23:00",
+        "dcTen": "Sân Vận Động Quốc Gia Mỹ Đình",
+        "dcCuThe": "Số 1 Lê Đức Thọ, Mỹ Đình 1, Nam Từ Liêm, Hà Nội",
+        "giaMin": 950000,
+        "giaMax": 10000000,
+        "moTa": "<b>Nội dung nổi bật:</b> Concert Anh Trai Say Hi (mùa 2)...",
+        "tickets": [
+            {"loai":"PREMIER LOUNGE","gia":10000000},
+            {"loai":"SVIP A","gia":5000000},
+            {"loai":"SVIP B","gia":5000000},
+            {"loai":"FANZONE A","gia":2500000},
+            {"loai":"FANZONE B","gia":2500000},
+            {"loai":"CAT 1A","gia":2500000},
+            {"loai":"CAT 1B","gia":2500000},
+            {"loai":"CAT 2B","gia":1500000},
+            {"loai":"CAT 3A","gia":1000000},
+            {"loai":"CAT 3B","gia":1000000},
+            {"loai":"GA A","gia":950000},
+            {"loai":"GA B","gia":950000}
+        ]
+    },
+
+    "gaihome": {
+        "ten": "GAI HOME CONCERT",
+        "categories": ["nhac-song"],
+        "anh": "/static/images/nhac-song/GAIHOME.png",
+        "date": "2026-03-15",
+        "displayDate": "15.03.2026",
+        "startTime": "20:00",
+        "endTime": "23:59",
+        "dcTen": "Vinhome Ocean Park 3",
+        "dcCuThe": "Nghĩa Trụ, Hưng Yên",
+        "giaMin": 800000,
+        "giaMax": 6000000,
+        "moTa": "<b>Nội dung nổi bật:</b> Không gian âm nhạc Acoustic lắng đọng.",
+        "tickets": [
+            {"loai":"STAR LOUNGE","gia":6000000},
+            {"loai":"ĐIÊN LÊN/TINH HOA","gia":4000000},
+            {"loai":"GAI CON","gia":3500000},
+            {"loai":"ĐỈNH NÓC/MỨT GỪNG","gia":3000000},
+            {"loai":"MƯA LỬA/KỊCH TRẦN","gia":2500000},
+            {"loai":"BAY PHẤP PHỚI/NHÀ TRẺ","gia":2000000},
+            {"loai":"HOẢ CA/CHÍN MUỒI","gia":1500000},
+            {"loai":"HOẢ LỰC/CÁ LỚN","gia":1000000}
+        ]
+    },
+
+    "hercc": {
+        "ten": "HER CONCERT",
+        "categories": ["nhac-song"],
+        "anh": "/static/images/nhac-song/HERCC.jpg",
+        "date": "2026-03-07",
+        "displayDate": "07.03.2026",
+        "startTime": "19:30",
+        "endTime": "23:59",
+        "dcTen": "Nhà hát Hòa Bình",
+        "dcCuThe": "Quận 10, TP.HCM",
+        "giaMin": 590000,
+        "giaMax": 5000000,
+        "moTa": "Là đêm nhạc đặc biệt Dốc Mộng Mơ dành tặng phái đẹp...",
+        "tickets": [
+            {"loai":"VĨNH CỬU (VIP Lounge)","gia":5000000},
+            {"loai":"MỘNG MƠ (Seating)","gia":2990000},
+            {"loai":"SAY ĐẮM (Seating)","gia":2390000},
+            {"loai":"VƯƠNG VẤN (Seating)","gia":1790000},
+            {"loai":"SI MÊ (Seating)","gia":1290000},
+            {"loai":"TƯƠNG TƯ (Seating)","gia":890000},
+            {"loai":"TÌNH ĐẦU (Standing)","gia":1590000},
+            {"loai":"RUNG ĐỘNG (Standing)","gia":1190000},
+            {"loai":"NGỌT NGÀO (Standing)","gia":890000},
+            {"loai":"MẬP MỜ (Standing)","gia":590000}
+        ]
+    },
+
+    "lovenote": {
+        "ten": "LOVE NOTE CONCERT",
+        "categories": ["nhac-song"],
+        "anh": "/static/images/nhac-song/LOVENOTE.jpg",
+        "date": "2026-02-22",
+        "displayDate": "22.02.2026",
+        "startTime": "18:00",
+        "endTime": "23:59",
+        "dcTen": "Da Lat Opera House",
+        "dcCuThe": "Lâm Viên, Đà Lạt",
+        "giaMin": 700000,
+        "giaMax": 2900000,
+        "moTa": "<b>Nội dung nổi bật:</b> Nhạc tình lãng mạn dưới hoàng hôn Đà Lạt...",
+        "tickets": [
+            {"loai":"MỘNG MƠ","gia":2900000},
+            {"loai":"KÝ ỨC","gia":2300000},
+            {"loai":"THANH XUÂN","gia":1800000},
+            {"loai":"TƯƠNG TƯ","gia":1500000},
+            {"loai":"HOÀI NIỆM","gia":1200000},
+            {"loai":"TRI KỶ","gia":900000}
+        ]
+    },
+
+    "supershow": {
+        "ten": "SUPER SHOW SPECIAL",
+        "categories": ["nhac-song"],
+        "anh": "/static/images/nhac-song/SUPERSHOW.png",
+        "date": "2026-03-21",
+        "displayDate": "21.03.2026",
+        "startTime": "19:00",
+        "endTime": "23:59",
+        "dcTen": "SVĐ Quân Khu 7",
+        "dcCuThe": "Hoàng Văn Thụ, TP.HCM",
+        "giaMin": 1500000,
+        "giaMax": 6000000,
+        "moTa": "<b>Super Show 10 là một sự kiện đặc biệt...",
+        "tickets": [
+            {"loai":"SUPER","gia":6000000},
+            {"loai":"JUNIOR","gia":5000000},
+            {"loai":"E.L.F.","gia":4000000},
+            {"loai":"WHEEL CHAIR","gia":4000000},
+            {"loai":"SAPPHIRE","gia":2800000},
+            {"loai":"BLUE","gia":2200000}
+        ]
+    },
+
+    "daohh": {
+        "ten":"HÀI KỊCH: ĐẢO HOA HẬU",
+        "categories":["san-khau"],
+        "anh":"/static/images/san-khau-nt/DAOHH.jpg",
+        "date":"2026-03-20",
+        "displayDate":"20.03.2026",
+        "startTime":"20:00",
+        "endTime":"23:59",
+        "dcTen":"Sân khấu Idecaf",
+        "dcCuThe":"Lê Thánh Tôn, Quận 1, TP.HCM",
+        "giaMin":350000,
+        "giaMax":500000,
+        "moTa":"Với sự tham gia của các diễn viên...",
+        "tickets":[
+            {"loai":"VVIP","gia":500000},
+            {"loai":"VIP","gia":450000},
+            {"loai":"Thường","gia":400000},
+            {"loai":"Lầu","gia":350000}
+        ]
+    },
+
+    "diadao": {
+        "ten":"THỰC CẢNH: ĐỊA ĐẠO CỦ CHI",
+        "categories":["san-khau"],
+        "anh":"/static/images/san-khau-nt/DIADAO.jpg",
+        "date":"2026-03-07",
+        "displayDate":"07.03.2026",
+        "startTime":"08:00",
+        "endTime":"23:59",
+        "dcTen":"Di tích Địa Đạo Củ Chi",
+        "dcCuThe":"Củ Chi, TP.HCM",
+        "giaMin":399000,
+        "giaMax":399000,
+        "moTa":"Nhằm đưa ra sản phẩm mới để thu hút...",
+        "tickets":[{"loai":"TRĂNG CHIẾN KHU","gia":399000}]
+    },
+
+    "kichidecaf":{
+        "ten":"NHÀ HÁT KỊCH IDECAF",
+        "categories":["san-khau"],
+        "anh":"/static/images/san-khau-nt/KICH.jpg",
+        "date":"2026-03-28",
+        "displayDate":"28.03.2026",
+        "startTime":"19:00",
+        "endTime":"23:59",
+        "dcTen":"Idecaf Quận 1",
+        "dcCuThe":"TP. Hồ Chí Minh",
+        "giaMin":200000,
+        "giaMax":200000,
+        "moTa":"Các vở kịch tâm lý xã hội nổi tiếng...",
+        "tickets":[{"loai":"Đồng giá","gia":200000}]
+    },
+
+    "ptnv": {
+        "ten":"KHÓA HỌC: PHÂN TÍCH NGHIỆP VỤ",
+        "categories":["hoi-thao"],
+        "anh":"/static/images/san-khau-nt/PTNV.png",
+        "date":"2026-04-02",
+        "displayDate":"02.04.2026",
+        "startTime":"08:30",
+        "endTime":"23:59",
+        "dcTen":"BAC Center",
+        "dcCuThe":"Quận 1, TP.HCM",
+        "giaMin":7300000,
+        "giaMax":7300000,
+        "moTa":"Nâng cao kiến thức về phân tích nghiệp vụ phần mềm...",
+        "tickets":[{"loai":"Học phí","gia":7300000}]
+    },
+
+    "xuanthi": {
+        "ten":"LỆ QUYÊN: XUÂN THÌ",
+        "categories":["san-khau"],
+        "anh":"/static/images/san-khau-nt/XUANTHI.jpg",
+        "date":"2026-04-10",
+        "displayDate":"10.04.2026",
+        "startTime":"20:00",
+        "endTime":"23:59",
+        "dcTen":"Nhà hát Hoa Phượng",
+        "dcCuThe":"Hải Phòng",
+        "giaMin":800000,
+        "giaMax":5000000,
+        "moTa":"<b>Nội dung nổi bật:</b> Đêm nhạc Bolero...",
+        "tickets":[
+            {"loai":"SVIP","gia":5000000},
+            {"loai":"VIP","gia":4000000},
+            {"loai":"VIP 1","gia":3000000},
+            {"loai":"VIP 2","gia":2500000},
+            {"loai":"VIP 3","gia":2000000},
+            {"loai":"CAT 1","gia":1000000},
+            {"loai":"CAT 2","gia":800000}
+        ]
+    },
+    "builttolast":{
+        "ten":"HỘI THẢO: BUILD TO LAST",
+        "categories":["hoi-thao"],
+        "anh":"/static/images/hoi-thao-workshop/BUILTL.png",
+        "date":"2026-04-07",
+        "displayDate":"07.04.2026",
+        "startTime":"09:00",
+        "endTime":"23:59",
+        "dcTen":"JW Marriott Hotel & Suites Saigon",
+        "dcCuThe":"Quận 1, TP.HCM",
+        "giaMin":400000,
+        "giaMax":550000,
+        "moTa":"<b>Nội dung nổi bật:</b> Chia sẻ chiến lược xây dựng doanh nghiệp trường tồn từ các CEO hàng đầu.",
+        "tickets":[
+            {"loai":"MEMBER (CCIFV, MEDIA PARTNERS)","gia":400000},
+            {"loai":"NON MEMBER","gia":550000}
+        ]
+    },
+
+    "conviction":{
+        "ten":"WORKSHOP: CONVICTION",
+        "categories":["hoi-thao"],
+        "anh":"/static/images/hoi-thao-workshop/Conviction.png",
+        "date":"2026-05-08",
+        "displayDate":"08.05.2026",
+        "startTime":"14:00",
+        "endTime":"23:59",
+        "dcTen":"Dreamplex",
+        "dcCuThe":"Quận 4, TP.HCM",
+        "giaMin":1299000,
+        "giaMax":1299000,
+        "moTa":"<b>Nội dung nổi bật:</b> Workshop rèn luyện tư duy thuyết phục và đàm phán trong kinh doanh.",
+        "tickets":[{"loai":"Trọn gói","gia":1299000}]
+    },
+
+    "nenthom":{
+        "ten":"LÀM NẾN THƠM HANDMADE",
+        "categories":["hoi-thao"],
+        "anh":"/static/images/hoi-thao-workshop/NENTHOM.jpg",
+        "date":"2026-04-12",
+        "displayDate":"12.04.2026",
+        "startTime":"15:00",
+        "endTime":"23:59",
+        "dcTen":"The Craft House",
+        "dcCuThe":"Hoàn Kiếm, Hà Nội",
+        "giaMin":315000,
+        "giaMax":315000,
+        "moTa":"<b>Nội dung nổi bật:</b> Tự tay sáng tạo mùi hương và trang trí nến thơm.",
+        "tickets":[{"loai":"Đồng giá","gia":315000}]
+    },
+
+    "lamgom":{
+        "ten":"TRẢI NGHIỆM LÀM GỐM",
+        "categories":["hoi-thao"],
+        "anh":"/static/images/hoi-thao-workshop/GOM.jpg",
+        "date":"2026-01-19",
+        "displayDate":"19.01.2026",
+        "startTime":"09:30",
+        "endTime":"23:59",
+        "dcTen":"Xưởng Gốm Bát Tràng",
+        "dcCuThe":"Gia Lâm, Hà Nội",
+        "giaMin":400000,
+        "giaMax":400000,
+        "moTa":"<b>Nội dung nổi bật:</b> Học kỹ thuật xoay gốm truyền thống.",
+        "tickets":[{"loai":"Người lớn","gia":400000}]
+    },
+
+    "mockhoa":{
+        "ten":"VẼ MÓC KHÓA SÁNG TẠO",
+        "categories":["hoi-thao"],
+        "anh":"/static/images/hoi-thao-workshop/MOCKHOA.jpg",
+        "date":"2026-04-14",
+        "displayDate":"14.04.2026",
+        "startTime":"10:00",
+        "endTime":"23:59",
+        "dcTen":"LemLab",
+        "dcCuThe":"Đống Đa, Hà Nội",
+        "giaMin":99000,
+        "giaMax":99000,
+        "moTa":"<b>Nội dung nổi bật:</b> Vẽ màu Acrylic lên phôi móc khóa.",
+        "tickets":[{"loai":"Vé vẽ","gia":99000}]
+    },
+
+    "duluon":{
+        "ten":"BAY DÙ LƯỢN ĐỒI BÙ",
+        "categories":["tham-quan"],
+        "anh":"/static/images/tham-quan-tn/DU.jpg",
+        "date":"2026-02-21",
+        "displayDate":"21.02.2026",
+        "startTime":"07:00",
+        "endTime":"23:59",
+        "dcTen":"Đồi Bù - Chương Mỹ",
+        "dcCuThe":"Hà Nội",
+        "giaMin":1850000,
+        "giaMax":1850000,
+        "moTa":"<b>Nội dung nổi bật:</b> Chinh phục bầu trời và ngắm nhìn cánh đồng hoa lau.",
+        "tickets":[{"loai":"Gói bay","gia":1850000}]
+    },
+
+    "staytemple":{
+        "ten":"STAY IN THE TEMPLE",
+        "categories":["tham-quan"],
+        "anh":"/static/images/tham-quan-tn/STAYTEMPLE.png",
+        "date":"2026-01-27",
+        "displayDate":"27.01.2026",
+        "startTime":"08:00",
+        "endTime":"23:59",
+        "dcTen":"Chùa cổ Ninh Bình",
+        "dcCuThe":"Ninh Bình",
+        "giaMin":200000,
+        "giaMax":200000,
+        "moTa":"Trải nghiệm đời sống an yên tại chùa chiền.",
+        "tickets":[{"loai":"Tham gia","gia":200000}]
+    },
+
+    "suoitien":{
+        "ten":"KDL VĂN HÓA SUỐI TIÊN",
+        "categories":["tham-quan"],
+        "anh":"/static/images/tham-quan-tn/SUOITIEN.jpg",
+        "date":"23:59",
+        "displayDate":"",
+        "startTime":"08:00",
+        "endTime":"17:00",
+        "dcTen":"Suối Tiên",
+        "dcCuThe":"Quận 9, TP.HCM",
+        "giaMin":100000,
+        "giaMax":150000,
+        "moTa":"Khu du lịch văn hóa kết hợp giải trí nổi tiếng.",
+        "tickets":[
+            {"loai":"Người lớn","gia":150000},
+            {"loai":"Trẻ em","gia":100000}
+        ]
+    },
+
+    "tourdem":{
+        "ten":"TOUR ĐÊM VĂN MIẾU",
+        "categories":["tham-quan"],
+        "anh":"/static/images/tham-quan-tn/TOUR.png",
+        "date":"2026-02-26",
+        "displayDate":"26.02.2026",
+        "startTime":"19:00",
+        "endTime":"23:59",
+        "dcTen":"Văn Miếu",
+        "dcCuThe":"Đống Đa, Hà Nội",
+        "giaMin":0,
+        "giaMax":299000,
+        "moTa":"Khám phá Văn Miếu - Quốc Tử Giám về đêm.",
+        "tickets":[
+            {"loai":"Trẻ em dưới 1m","gia": 0},
+            {"loai":"COMBO 2 show","gia":299000}
+        ]
+    },
+
+    "phatbao":{
+        "ten":"TRIỂN LÃM PHẬT BẢO",
+        "categories":["tham-quan"],
+        "anh":"/static/images/tham-quan-tn/TRIENLAM.png",
+        "date":"2026-02-28",
+        "displayDate":"28.02.2026",
+        "startTime":"09:00",
+        "endTime":"23:59",
+        "dcTen":"Bảo tàng Lịch sử",
+        "dcCuThe":"Hà Nội",
+        "giaMin":150000,
+        "giaMax":150000,
+        "moTa":"Không gian thưởng lãm lịch sử văn hóa Phật giáo.",
+        "tickets":[{"loai":"Đồng giá","gia":150000}]
+    },
+
+    "afc":{
+        "ten":"BẮN CUNG THỂ THAO AFC",
+        "categories":["the-thao"],
+        "anh":"/static/images/the-thao/AFC.jpg",
+        "date":"23:59",
+        "displayDate":"",
+        "startTime":"09:00",
+        "endTime":"21:00",
+        "dcTen":"AFC Hà Nội",
+        "dcCuThe":"Mỹ Đình, Hà Nội",
+        "giaMin":200000,
+        "giaMax":270000,
+        "moTa":"Trải nghiệm bắn cung với huấn luyện viên hướng dẫn.",
+        "tickets":[{"loai":"Gói cơ bản","gia":270000}]
+    },
+
+    "vba":{
+        "ten":"BÓNG RỔ CHUYÊN NGHIỆP VBA",
+        "categories":["the-thao"],
+        "anh":"/static/images/the-thao/VBA.png",
+        "date":"2026-02-18",
+        "displayDate":"18.02.2026",
+        "startTime":"19:00",
+        "endTime":"23:59",
+        "dcTen":"NTD Tây Hồ",
+        "dcCuThe":"Tây Hồ, Hà Nội",
+        "giaMin":200000,
+        "giaMax":800000,
+        "moTa":"Trận đấu bóng rổ chuyên nghiệp VBA.",
+        "tickets":[
+            {"loai":"VIP","gia":800000},
+            {"loai":"Standard","gia":200000}
+        ]
+    },
+
+    "lion":{
+        "ten":"LION CHAMPIONSHIP 29",
+        "categories":["the-thao"],
+        "anh":"/static/images/the-thao/LIONCHAM.png",
+        "date":"2025-12-27",
+        "displayDate":"27.12.2025",
+        "startTime":"18:30",
+        "endTime":"23:59",
+        "dcTen":"NTD Quần Ngựa",
+        "dcCuThe":"Ba Đình, Hà Nội",
+        "giaMin":200000,
+        "giaMax":200000,
+        "moTa":"Các trận MMA nảy lửa giữa các võ sĩ hàng đầu.",
+        "tickets":[{"loai":"Vé thường","gia":200000}]
+    },
+
+    "arena":{
+        "ten":"AIC LIÊN QUÂN WORLD CUP",
+        "categories":["the-thao"],
+        "anh":"/static/images/the-thao/ARENA.jpg",
+        "date":"2026-03-01",
+        "displayDate":"01.03.2026",
+        "startTime":"13:00",
+        "endTime":"23:59",
+        "dcTen":"Cung Điền Kinh Mỹ Đình",
+        "dcCuThe":"Nam Từ Liêm, Hà Nội",
+        "giaMin":249000,
+        "giaMax":249000,
+        "moTa":"Chung kết thế giới Liên Quân Mobile.",
+        "tickets":[{"loai":"DAY2","gia":249000}]
+    },
+
+    "vnpro":{
+        "ten":"VN BASKETBALL PRO",
+        "categories":["the-thao"],
+        "anh":"/static/images/the-thao/VNPRO.jpg",
+        "date":"2025-11-05",
+        "displayDate":"05.11.2025",
+        "startTime":"19:00",
+        "endTime":"23:59",
+        "dcTen":"NTD Lãnh Binh Thăng",
+        "dcCuThe":"Quận 11, TP.HCM",
+        "giaMin":0,
+        "giaMax":0,
+        "moTa":"Giải bóng rổ phong trào.",
+        "tickets":[{"loai":"Tự do","gia": 0}]
+    },
+
+    "countdown":{
+        "ten":"COUNTDOWN PARTY 2026",
+        "categories":["khac"],
+        "anh":"/static/images/khac/COUNTDOWN.jpg",
+        "date":"2025-12-31",
+        "displayDate":"31.12.2025",
+        "startTime":"20:00",
+        "endTime":"23:59",
+        "dcTen":"Hồ Hoàn Kiếm",
+        "dcCuThe":"Hoàn Kiếm, Hà Nội",
+        "giaMin":500000,
+        "giaMax":500000,
+        "moTa":"Lễ hội âm nhạc đếm ngược đón năm mới.",
+        "tickets":[{"loai":"Fanzone","gia":500000}]
+    },
+
+    "mienmo":{
+        "ten":"TRIỂN LÃM: MIỀN MƠ",
+        "categories":["khac"],
+        "anh":"/static/images/khac/MIENMO.png",
+        "date":"23:59",
+        "displayDate":"",
+        "startTime":"09:00",
+        "endTime":"20:00",
+        "dcTen":"The Factory Gallery",
+        "dcCuThe":"Thảo Điền, TP.HCM",
+        "giaMin":300000,
+        "giaMax":300000,
+        "moTa":"Triển lãm nghệ thuật đương đại kết hợp VR.",
+        "tickets":[
+            {"loai":"Người lớn","gia":300000},
+            {"loai":"HSSV","gia":150000}
+        ]
+    },
+
+    "holifest":{
+        "ten":"HOLI FESTIVAL 2026",
+        "categories":["khac"],
+        "anh":"/static/images/khac/HOLI.jpg",
+        "date":"2026-03-07",
+        "displayDate":"07.03.2026",
+        "startTime":"14:00",
+        "endTime":"23:59",
+        "dcTen":"Benaras Central",
+        "dcCuThe":"Sơn Trà, Đà Nẵng",
+        "giaMin":250000,
+        "giaMax":250000,
+        "moTa":"Lễ hội sắc màu Ấn Độ sôi động.",
+        "tickets":[{"loai":"Vé lẻ","gia":250000}]
+    },
+
+    "metashow":{
+        "ten":"TRIỂN LÃM ÁNH SÁNG META",
+        "categories":["khac"],
+        "anh":"/static/images/khac/TRIENLAM.jpg",
+        "date":"23:59",
+        "displayDate":"",
+        "startTime":"18:00",
+        "endTime":"22:00",
+        "dcTen":"Thiso Mall Sala",
+        "dcCuThe":"Quận 2, TP.HCM",
+        "giaMin":150000,
+        "giaMax":250000,
+        "moTa":"Triển lãm kết hợp công nghệ và nghệ thuật ánh sáng.",
+        "tickets":[
+            {"loai":"Người lớn","gia":250000},
+            {"loai":"Trẻ em","gia":150000}
+        ]
+    },
+
+    "giailan":{
+        "ten":"GIẢI LÂN SƯ RỒNG QUỐC TẾ",
+        "categories":["khac"],
+        "anh":"/static/images/khac/GIAILAN.jpeg",
+        "date":"2026-02-01",
+        "displayDate":"01.02.2026",
+        "startTime":"08:00",
+        "endTime":"23:59",
+        "dcTen":"Trung tâm DV Công Phường An Đông",
+        "dcCuThe":"Quận 5, TP.HCM",
+        "giaMin":100000,
+        "giaMax":100000,
+        "moTa":"Giải đấu Lân Sư Rồng quốc tế.",
+        "tickets":[{"loai":"Xem hội","gia":100000}]
+    }
+}

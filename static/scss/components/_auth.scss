@@ -1,0 +1,62 @@
+// USE
+@use '_variables' as v;
+@use '_dropdownhover' as *;
+// COLOR VARIABLES
+
+// SIZE VARIABLES
+$user-menu_trigger_min_size: 42.1px;
+$auth_min_width: 116.2px;
+$auth_max_width: 200px;
+$auth_max_height: 42.1px;
+$avatar_size: 32px;
+
+.auth {
+    display: flex;
+    align-items: center;
+
+    #userWrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        &:hover {
+            background: v.$header_element_color;
+        }
+
+        
+        &:hover .dropdown {
+            display: flex;
+            width: $dropdown_width;
+        }
+    }
+    .dropdown {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+    }
+    
+    .dropdown a {
+        display: block;
+        width: 100%;
+        cursor: pointer;
+    }
+    
+    #avatarText{
+        margin: 5px 0 5px 5px;
+        min-width: 70.3px;
+    }
+}
+
+
+#avatar {
+    width: $avatar_size;
+    aspect-ratio: 1/1;
+
+    border: 2px solid whitesmoke;
+    border-radius: 50%;
+
+    object-fit: cover;
+}

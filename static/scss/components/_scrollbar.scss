@@ -1,0 +1,28 @@
+// USE
+@use '_variables' as v;
+
+// COLOR VARIABLES
+$scrollbar_thumb_inactive_color: #128e50;
+$scrollbar_thumb_active_color: rgb(223, 223, 223);
+
+// SIZE VARIABLES
+$scrollbar_size: 4px;
+
+// SCROLLBAR
+::-webkit-scrollbar {
+  width: $scrollbar_size;
+  height: $scrollbar_size;
+
+}
+
+::-webkit-scrollbar-track {
+  background: v.$body_bg_color;
+}
+
+::-webkit-scrollbar-thumb {
+  background: v.$header_bg_color;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $scrollbar_thumb_active_color;
+}

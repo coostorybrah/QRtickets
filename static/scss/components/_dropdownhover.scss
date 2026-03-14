@@ -1,0 +1,56 @@
+// USE
+@use '_variables' as v;
+
+// SIZE VARIABLES
+$dropdown_width: 160px;
+
+// WRAPPER (positions dropdown correctly)
+.dropdown-wrapper {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+// DROPDOWN
+.dropdown-hover {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .dropdown {
+        background: white;
+
+        width: $dropdown_width;
+
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+
+        border-radius: 6px;
+        overflow: hidden;
+
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: flex-start;
+
+        a {
+            width: 100%;
+            padding: 12px 16px;
+            text-align: left;
+            color: black;
+            text-decoration: none;
+
+            &:hover {
+                background: #e7e7e7;
+            }
+        }
+    }
+
+    &:hover .dropdown {
+        display: flex;
+    }
+}
