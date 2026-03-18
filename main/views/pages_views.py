@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.db.models import Q
 from events.models import Event, Venue, Category
 
 import json
@@ -54,8 +53,7 @@ def search(request):
         events = events.filter(date=date)
 
     if categories:
-        for cat in categories:
-            events = events.filter(categories__slug=cat)
+        events = events.filter(categories__slug__in=categories).distinct()
 
     filtered_events = []
     for event in events:
