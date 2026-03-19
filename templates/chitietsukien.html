@@ -38,8 +38,6 @@
 
         <div class="price">
             <hr>
-            <p>Giá từ: <span id="giaVe"></span></p>
-            <button type="button">Mua vé ngay</button>
         </div>
 
     </div>
@@ -53,6 +51,16 @@
 <!-- EVENT DETAILS -->
 <div class="event">
 
+    <div class="description">
+
+        <h1>CHI TIẾT SỰ KIỆN</h1>
+
+        <div id="moTa"></div>
+
+    </div>
+
+    <div class="ticketsSection">
+
     <div class="tickets">
 
         <h1>THÔNG TIN VÉ</h1>
@@ -62,6 +70,15 @@
             <table id="bangGiaVe">
             </table>
 
+            <div class="quantityWrapper">
+                <label for="soLuongVe">Số lượng vé</label>
+                <select id="soLuongVe" aria-label="Số lượng vé">
+                    <option value="1" selected>1 vé</option>
+                    <option value="2">2 vé</option>
+                    <option value="3">3 vé</option>
+                </select>
+            </div>
+
             <div class="footnote">
                 * Lưu ý: Giá trên đã bao gồm thuế VAT.
             </div>
@@ -70,11 +87,14 @@
 
     </div>
 
-    <div class="description">
+    <div class="totalPrice">
 
-        <h1>CHI TIẾT SỰ KIỆN</h1>
+        <h1>TỔNG TIỀN</h1>
 
-        <div id="moTa"></div>
+        <p id="tongTien">—</p>
+        <button id="thanhToanBtn" type="button">Thanh toán</button>
+
+    </div>
 
     </div>
 

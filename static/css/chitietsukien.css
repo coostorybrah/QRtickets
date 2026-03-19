@@ -515,14 +515,22 @@ main {
   margin: 12px 0 12px 0;
   padding: 8px 0 8px 0;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-evenly;
   align-items: flex-start;
   gap: 20px;
 }
+.event .ticketsSection {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 20px;
+}
 .event .tickets {
   background: #27272A;
-  width: 50%;
+  width: 66%;
   padding-bottom: 10px;
   border-radius: 15px;
   overflow: hidden;
@@ -555,6 +563,18 @@ main {
   padding: 5px 0 5px 0;
   border: 1px solid white;
 }
+.event .tickets table tr.ticket-row {
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.event .tickets table tr.ticket-row:hover {
+  background: #2f4f3f;
+}
+.event .tickets table tr.ticket-row.selected {
+  background: #1a6640;
+  outline: 2px solid #26bc71;
+  outline-offset: -2px;
+}
 .event .tickets table td {
   padding: 10px;
   border: 1px solid white;
@@ -564,9 +584,28 @@ main {
   font-size: small;
   margin-top: 5px;
 }
+.event .tickets .quantityWrapper {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.event .tickets .quantityWrapper select {
+  min-width: 100px;
+  min-height: 32px;
+  border: 1px solid #4dba83;
+  border-radius: 6px;
+  background: #2f2f33;
+  color: whitesmoke;
+  padding: 4px 8px;
+}
+.event .tickets .quantityWrapper select:focus {
+  outline: none;
+  border-color: #26bc71;
+}
 .event .description {
   background: #27272A;
-  width: 50%;
+  width: 100%;
   padding-bottom: 10px;
   border-radius: 15px;
   overflow: hidden;
@@ -590,6 +629,50 @@ main {
   padding: 8px 10px 8px 10px;
   min-height: 2rem;
 }
+.event .totalPrice {
+  background: #27272A;
+  width: 34%;
+  border-radius: 15px;
+  overflow: hidden;
+}
+.event .totalPrice h1 {
+  background: #26bc71;
+  width: 100%;
+  height: 2rem;
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: larger;
+}
+.event .totalPrice #tongTien {
+  min-height: 80px;
+  padding: 12px;
+  color: #4dba83;
+  font-size: 2rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.event .totalPrice #thanhToanBtn {
+  width: calc(100% - 24px);
+  margin: 0 12px 12px;
+  min-height: 40px;
+  border: none;
+  border-radius: 8px;
+  background: #26bc71;
+  color: whitesmoke;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.event .totalPrice #thanhToanBtn:hover {
+  background: #33d07d;
+  color: #121212;
+}
 
 @media (max-width: 881px) {
   main {
@@ -598,6 +681,11 @@ main {
     justify-content: flex-start;
     align-items: center;
     background: linear-gradient(180deg, #27272A 20%, #121212 40%);
+  }
+  .event .ticketsSection {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
   }
   .banner {
     margin: 2%;
@@ -654,4 +742,8 @@ main {
     padding: 10px;
     width: 100%;
   }
-}/*# sourceMappingURL=chitietsukien.css.map */
+  .event .totalPrice {
+    width: 100%;
+  }
+}
+/*# sourceMappingURL=chitietsukien.css.map */

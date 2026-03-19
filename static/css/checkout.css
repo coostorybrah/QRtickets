@@ -1,0 +1,159 @@
+main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.checkout-page {
+  width: 100%;
+  max-width: 1080px;
+  padding: 24px 16px;
+}
+
+.checkout-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+.checkout-form-card,
+.checkout-summary-card {
+  background: #27272a;
+  color: whitesmoke;
+  border-radius: 14px;
+  border: 1px solid #3b3b42;
+  padding: 18px;
+}
+
+.checkout-form-card h1,
+.checkout-summary-card h2 {
+  margin-bottom: 14px;
+}
+
+.qr-panel {
+  margin-bottom: 18px;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #4dba83;
+  background: #1d2a22;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.qr-panel h2 {
+  margin: 0;
+}
+
+.qr-subtitle {
+  color: #d9f8e7;
+}
+
+.qr-image {
+  width: 240px;
+  height: 240px;
+  border-radius: 12px;
+  background: #fff;
+  padding: 8px;
+}
+
+.qr-status {
+  color: #9dedbd;
+  font-weight: 600;
+}
+
+.qr-status.expired {
+  color: #ffb3b3;
+}
+
+.qr-regenerate-form {
+  margin-top: 6px;
+}
+
+.qr-regenerate-btn {
+  min-height: 38px;
+  border-radius: 8px;
+  border: 1px solid #4dba83;
+  background: transparent;
+  color: #d9f8e7;
+  padding: 8px 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.qr-regenerate-btn:hover {
+  background: #2b3f33;
+}
+
+.checkout-form {
+  display: grid;
+  gap: 8px;
+}
+
+.checkout-form label {
+  font-weight: 600;
+}
+
+.checkout-form input,
+.checkout-form select {
+  min-height: 40px;
+  border-radius: 8px;
+  border: 1px solid #4dba83;
+  background: #1f1f24;
+  color: whitesmoke;
+  padding: 8px 10px;
+}
+
+.checkout-form input:focus,
+.checkout-form select:focus {
+  outline: none;
+  border-color: #26bc71;
+}
+
+.checkout-form button {
+  margin-top: 8px;
+  min-height: 42px;
+  border: none;
+  border-radius: 8px;
+  background: #26bc71;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.checkout-form button:hover {
+  background: #35d783;
+  color: #121212;
+}
+
+.checkout-form button:disabled,
+.qr-regenerate-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.checkout-summary-card p {
+  margin-bottom: 10px;
+}
+
+.checkout-summary-card .total {
+  font-size: 1.2rem;
+  color: #4dba83;
+}
+
+.form-error {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ff8f8f;
+  border-radius: 8px;
+  background: rgba(255, 143, 143, 0.15);
+  color: #ffd7d7;
+}
+
+@media (max-width: 900px) {
+  .checkout-grid {
+    grid-template-columns: 1fr;
+  }
+}

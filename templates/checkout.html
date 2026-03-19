@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+{% endblock %}
+
+{% block title %}
+<title>QRticket - Thanh toán</title>
+{% endblock %}
+
+{% block main %}
+<section class="checkout-page">
+    <div class="checkout-grid">
+        <div class="checkout-form-card">
+            <h1>Thanh toán</h1>
+
+            {% if form_error %}
+                <div class="form-error">{{ form_error }}</div>
+            {% endif %}
+
+            {% if qr_order %}
+                <div class="qr-panel" data-order-id="{{ qr_order.id }}" data-expire-at="{{ qr_expires_at|date:'c' }}">
+                    <h2>Quét mã để thanh toán</h2>
+                    <p class="qr-subtitle">Mã QR chỉ có hiệu lực trong <strong id="countdown">60</strong> giây.</p>
+                    <img
+                        class="qr-image"
+                        src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data={{ qr_data|urlencode }}"
+                        alt="Mã QR thanh toán"
+                    >
+                    <p id="qr-status" class="qr-status">Đơn hàng đang chờ thanh toán.</p>
+                    <form method="post" class="qr-regenerate-form">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="regenerate">
+                        <input type="hidden" name="source_order_id" value="{{ qr_order.id }}">
+                        <input type="hidden" name="event_id" value="{{ event.slug }}">
+                        <button id="regenerate-qr-btn" type="submit" class="qr-regenerate-btn">Tạo lại mã QR</button>
+                    </form>
+                </div>
+            {% endif %}
+
+            <form method="post" class="checkout-form">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="create">
+
+                <input type="hidden" name="event_id" value="{{ event.slug }}">
+                <input type="hidden" name="price" value="{{ unit_price }}">
+                <input type="hidden" name="quantity" value="{{ quantity }}">
+
+                <label for="customer_name">Họ và tên</label>
+                <input id="customer_name" name="customer_name" type="text" required value="{{ form_values.customer_name }}">
+
+                <label for="phone_number">Số điện thoại</label>
+                <input id="phone_number" name="phone_number" type="text" required value="{{ form_values.phone_number }}">
+
+                <label for="contact_email">Email</label>
+                <input id="contact_email" name="contact_email" type="email" required value="{{ form_values.contact_email }}" {% if qr_order %}readonly{% endif %}>
+
+                <label for="payment_method">Phương thức thanh toán</label>
+                <select id="payment_method" name="payment_method" required>
+                    {% for method, label in payment_methods %}
+                        <option value="{{ method }}" {% if form_values.payment_method == method %}selected{% endif %}>{{ label }}</option>
+                    {% endfor %}
+                </select>
+
+                <button id="checkout-submit-btn" type="submit" {% if qr_order %}disabled{% endif %}>
+                    {% if qr_order %}Đang chờ quét QR{% else %}Xác nhận thanh toán{% endif %}
+                </button>
+            </form>
+        </div>
+
+        <aside class="checkout-summary-card">
+            <h2>Thông tin vé</h2>
+            <p><strong>Sự kiện:</strong> {{ event.name }}</p>
+            <p><strong>Địa điểm:</strong> {{ event.venue.name }}</p>
+            <p><strong>Ngày:</strong> {{ event.date }}</p>
+            <p><strong>Hạng vé:</strong> {{ ticket_type.name }}</p>
+            <p><strong>Đơn giá:</strong> {{ unit_price|floatformat:0 }} VND</p>
+            <p><strong>Số lượng:</strong> {{ quantity }}</p>
+            <hr>
+            <p class="total"><strong>Tổng tiền:</strong> {{ total_price|floatformat:0 }} VND</p>
+        </aside>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+{% if qr_order %}
+<script>
+    const qrPanel = document.querySelector('.qr-panel');
+    const countdownEl = document.getElementById('countdown');
+    const statusEl = document.getElementById('qr-status');
+    const submitBtn = document.getElementById('checkout-submit-btn');
+    const regenerateBtn = document.getElementById('regenerate-qr-btn');
+
+    if (qrPanel && countdownEl && statusEl) {
+        const expireAt = new Date(qrPanel.dataset.expireAt).getTime();
+        const orderId = qrPanel.dataset.orderId;
+        let isCancelling = false;
+        let timerId = null;
+
+        const getCsrfToken = () => {
+            const cookie = document.cookie
+                .split('; ')
+                .find((row) => row.startsWith('csrftoken='));
+            return cookie ? decodeURIComponent(cookie.split('=')[1]) : '';
+        };
+
+        const cancelOrder = async () => {
+            if (isCancelling) return;
+            isCancelling = true;
+
+            try {
+                const response = await fetch(`/checkout/expire/${orderId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': getCsrfToken(),
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    statusEl.textContent = 'Mã QR đã hết hạn. Đơn hàng đã bị hủy.';
+                    statusEl.classList.add('expired');
+                } else {
+                    statusEl.textContent = 'Mã QR đã hết hạn. Không thể cập nhật trạng thái đơn, vui lòng tải lại trang Vé của tôi.';
+                    statusEl.classList.add('expired');
+                }
+            } catch (error) {
+                statusEl.textContent = 'Mã QR đã hết hạn. Lỗi kết nối khi hủy đơn, vui lòng thử lại.';
+                statusEl.classList.add('expired');
+            }
+
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Mã QR đã hết hạn';
+            }
+
+            if (regenerateBtn) {
+                regenerateBtn.disabled = false;
+            }
+        };
+
+        const tick = () => {
+            const secondsLeft = Math.max(0, Math.ceil((expireAt - Date.now()) / 1000));
+            countdownEl.textContent = String(secondsLeft);
+
+            if (secondsLeft <= 0) {
+                clearInterval(timerId);
+                cancelOrder();
+            }
+        };
+
+        tick();
+        timerId = setInterval(tick, 1000);
+
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Đang chờ quét QR';
+        }
+
+        if (regenerateBtn) {
+            regenerateBtn.disabled = false;
+        }
+    }
+</script>
+{% endif %}
+{% endblock %}

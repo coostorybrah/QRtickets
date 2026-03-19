@@ -1,8 +1,21 @@
 import uuid
+from decimal import Decimal
 from django.db import models
 from django.conf import settings
 from django.db.models import Min, Max
 from users.models import Organizer
+
+TICKET_PRICE_OPTIONS = [
+    Decimal("500000.00"),
+    Decimal("1000000.00"),
+    Decimal("1500000.00"),
+]
+
+TICKET_PRICE_CHOICES = [
+    (TICKET_PRICE_OPTIONS[0], "500000 VND"),
+    (TICKET_PRICE_OPTIONS[1], "1000000 VND"),
+    (TICKET_PRICE_OPTIONS[2], "1500000 VND"),
+]
 
 # VENUE
 class Venue(models.Model):
@@ -124,10 +137,26 @@ class TicketType(models.Model):
 
     name = models.CharField(max_length=100)
 
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        choices=TICKET_PRICE_CHOICES,
+    )
 
     quantity_total = models.IntegerField()
     quantity_sold = models.IntegerField(default=0)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["event", "price"],
+                name="unique_ticket_price_per_event",
+            ),
+            models.CheckConstraint(
+                condition=models.Q(price__in=TICKET_PRICE_OPTIONS),
+                name="ticket_price_is_allowed_option",
+            ),
+        ]
 
     def __str__(self):
         return f"{self.event.name} - {self.name}"

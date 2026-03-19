@@ -7,7 +7,6 @@ export function initSignUp(){
 
         e.preventDefault();
 
-        const username = form.username.value.trim();
         const email = form.email.value.trim();
         const password = form.password.value;
         const confirm = form.password_confirm.value;
@@ -19,16 +18,26 @@ export function initSignUp(){
 
         const data = await sendAuthRequest("/api/signup/",
         {
-            username,
             email,
             password,
         });
 
+        if (data.success && data.requires_activation){
+            alert(data.message || "Đăng ký thành công. Vui lòng kiểm tra email để kích hoạt tài khoản.");
+            form.reset();
+            return;
+        }
+
         if (data.success){
-            alert(data.message);
-            location.reload();
+            const checkoutRedirect = sessionStorage.getItem("checkoutRedirect");
+            if (checkoutRedirect) {
+                sessionStorage.removeItem("checkoutRedirect");
+                window.location.href = checkoutRedirect;
+            } else {
+                location.reload();
+            }
         } else{
-            alert(data.message);
+            alert(data.message || "Đăng ký thất bại.");
         }
 
     });
@@ -43,19 +52,25 @@ export function initLogin(){
 
         e.preventDefault();
 
-        const username = form.username.value.trim();
+        const email = form.email.value.trim();
         const password = form.password.value;
 
         const data = await sendAuthRequest("/api/login/",
         {
-            username,
+            email,
             password
         });
 
         if (data.success){
-            location.reload();
+            const checkoutRedirect = sessionStorage.getItem("checkoutRedirect");
+            if (checkoutRedirect) {
+                sessionStorage.removeItem("checkoutRedirect");
+                window.location.href = checkoutRedirect;
+            } else {
+                location.reload();
+            }
         } else{
-            alert(data.message);
+            alert(data.message || "Đăng nhập thất bại.");
         }
     });
 }

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'events',
     'users',
     'main',
+    'orders',
 ]
 
 
@@ -127,3 +129,34 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
+
+
+# Email
+# Modes:
+# - EMAIL_MODE=mailtrap: send to virtual inbox (recommended for dev/test)
+# - EMAIL_MODE=gmail: send real email via Gmail SMTP
+# - EMAIL_MODE=console: print emails in terminal
+EMAIL_MODE = os.getenv("EMAIL_MODE", "mailtrap").lower()
+
+if EMAIL_MODE == "console":
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+    DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "noreply@qrticket.local")
+
+elif EMAIL_MODE == "gmail":
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_HOST = "smtp.gmail.com"
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "")
+    EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")
+    DEFAULT_FROM_EMAIL = EMAIL_HOST_USER or os.getenv("DEFAULT_FROM_EMAIL", "noreply@qrticket.local")
+
+else:
+    # Mailtrap virtual inbox SMTP settings
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_HOST = os.getenv("MAILTRAP_HOST", "sandbox.smtp.mailtrap.io")
+    EMAIL_PORT = int(os.getenv("MAILTRAP_PORT", "2525"))
+    EMAIL_USE_TLS = os.getenv("MAILTRAP_USE_TLS", "true").lower() == "true"
+    EMAIL_HOST_USER = os.getenv("MAILTRAP_USERNAME", "")
+    EMAIL_HOST_PASSWORD = os.getenv("MAILTRAP_PASSWORD", "")
+    DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "no-reply@qrticket.dev")

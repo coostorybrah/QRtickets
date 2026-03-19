@@ -6,6 +6,8 @@ urlpatterns = [
     path("", views.home, name="home"),
     path("search/", views.search, name="search"),
     path("chitietsukien/<str:event_id>/", views.event_detail, name="event_detail"),
+    path("checkout/", views.checkout, name="checkout"),
+    path("checkout/expire/<uuid:order_id>/", views.expire_order, name="expire_order"),
 
     # USER PATHS
     path('my-tickets/', views.my_tickets, name='my_tickets'),
@@ -19,6 +21,7 @@ urlpatterns = [
     # AUTH PATHS
     path("api/login/", views.api_login),
     path("api/signup/", views.api_signup),
+    path("activate/<uidb64>/<token>/", views.activate, name="activate"),
     path("api/me/", views.api_me),
     path("api/logout/", views.api_logout),
 

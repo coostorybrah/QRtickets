@@ -194,6 +194,26 @@ header .others__modalTrigger {
   font-weight: bold;
   cursor: pointer;
 }
+.modalTriggerActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.modalTrigger--register {
+  background-color: transparent;
+  color: whitesmoke;
+  outline: none;
+  border: 1px solid whitesmoke;
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: medium;
+  font-weight: bold;
+  cursor: pointer;
+}
+.modalTrigger--register:hover {
+  background-color: whitesmoke;
+  color: #121212;
+}
 .modalTrigger--signUp {
   width: 160px;
   align-self: center;
@@ -281,11 +301,24 @@ header .others__modalTrigger {
   margin-top: 5px;
   width: 100%;
   height: 100%;
+  gap: 8px;
+}
+.login__body form .auth-field {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.login__body form label {
+  width: 80%;
+  margin-top: 0;
+  color: #d7d7d7;
+  font-size: 0.95rem;
 }
 .login__body form input {
   padding: 3px;
-  margin-top: 5px;
-  width: 80%;
+  margin-top: 0;
+  width: 100%;
   height: 2em;
   border-radius: 6px;
   border-width: 1px solid #121212;
@@ -300,7 +333,7 @@ header .others__modalTrigger {
   color: whitesmoke;
   border: none;
   border-radius: 6px;
-  margin-top: 10px;
+  margin-top: 8px;
   margin-bottom: 5px;
   width: 60%;
   height: 30px;

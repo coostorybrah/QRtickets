@@ -60,9 +60,14 @@
 
         {% else %}
             <div id="guestUI" class="wrapper modalTrigger">
-                <button type="button" class="modalTrigger--login" data-open="mdl-login">
-                    Đăng nhập / Đăng ký
-                </button>
+                <div class="modalTriggerActions">
+                    <button type="button" class="modalTrigger--login" data-open="mdl-login">
+                        Đăng nhập
+                    </button>
+                    <button type="button" class="modalTrigger--login" data-open="mdl-signUp">
+                        Đăng ký
+                    </button>
+                </div>
             </div>
         {% endif %}
         </div>
@@ -88,8 +93,16 @@
         <div class="login__body">
             <form class="login" id="login-form">
                 {% csrf_token %}
-                <input name="username" type="text" placeholder="Email hoặc số điện thoại" required>
-                <input name="password" type="password" placeholder="Mật khẩu" required>
+                <div class="auth-field">
+                    <label for="login_email">Email</label>
+                    <input id="login_email" name="email" type="email" placeholder="Nhập email" required>
+                </div>
+
+                <div class="auth-field">
+                    <label for="login_password">Mật khẩu</label>
+                    <input id="login_password" name="password" type="password" placeholder="Nhập mật khẩu" required>
+                </div>
+
                 <button type="submit" class="login__button">
                     Đăng nhập
                 </button>
@@ -114,10 +127,20 @@
         <div class="login__body">
             <form class="login" id="signUp-form">
                 {% csrf_token %}
-                <input name="username" type="text" placeholder="Nhập username" required>
-                <input name="email" type="text" placeholder="Email" required>
-                <input name="password" type="password" placeholder="Mật khẩu" required>
-                <input name="password_confirm" type="password" placeholder="Nhập lại mật khẩu" required>
+                <div class="auth-field">
+                    <label for="signup_email">Email</label>
+                    <input id="signup_email" name="email" type="email" placeholder="Nhập email" required>
+                </div>
+
+                <div class="auth-field">
+                    <label for="signup_password">Mật khẩu</label>
+                    <input id="signup_password" name="password" type="password" placeholder="Nhập mật khẩu" required>
+                </div>
+
+                <div class="auth-field">
+                    <label for="signup_password_confirm">Xác nhận mật khẩu</label>
+                    <input id="signup_password_confirm" name="password_confirm" type="password" placeholder="Nhập lại mật khẩu" required>
+                </div>
 
                 <button type="submit" class="login__button">
                     Đăng ký

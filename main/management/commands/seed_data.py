@@ -1,5 +1,6 @@
 import json
 import random
+from decimal import Decimal
 from datetime import datetime
 from django.utils import timezone
 
@@ -9,6 +10,12 @@ from django.conf import settings
 
 from users.models import Organizer
 from events.models import Event, Venue, TicketType, Category
+
+DEFAULT_TICKET_TYPES = [
+    ("Standard", Decimal("500000.00")),
+    ("Premium", Decimal("1000000.00")),
+    ("VIP", Decimal("1500000.00")),
+]
 
 User = get_user_model()
 
@@ -181,14 +188,14 @@ class Command(BaseCommand):
                 if cat_slug in category_objs:
                     event.categories.add(category_objs[cat_slug])
 
-            # TICKETS 
+            # TICKETS
             event.ticket_types.all().delete()
 
-            for ticket in data["tickets"]:
+            for ticket_name, ticket_price in DEFAULT_TICKET_TYPES:
                 TicketType.objects.create(
                     event=event,
-                    name=ticket["loai"],
-                    price=ticket["gia"],
+                    name=ticket_name,
+                    price=ticket_price,
                     quantity_total=200,
                     quantity_sold=random.randint(0, 100)
                 )

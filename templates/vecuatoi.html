@@ -2,10 +2,497 @@
 {% load static %}
 
 {% block style %}
-    
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/vecuatoi.css' %}">
+<style>
+	.tickets-page {
+		max-width: 1040px;
+		margin: 36px auto;
+		padding: 0 16px;
+	}
+
+	.tickets-card {
+		background: #1b1b1b;
+		border: 1px solid #2d2d2d;
+		border-radius: 12px;
+		padding: 24px;
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+	}
+
+	.tickets-title {
+		margin-bottom: 8px;
+	}
+
+	.tickets-subtitle {
+		color: #cfcfcf;
+		margin-bottom: 18px;
+	}
+
+	.auth-tabs {
+		display: flex;
+		gap: 8px;
+		margin-bottom: 16px;
+	}
+
+	.auth-tab {
+		border: 1px solid #2d2d2d;
+		background: #121212;
+		color: #d8d8d8;
+		border-radius: 8px;
+		padding: 8px 12px;
+		cursor: pointer;
+	}
+
+	.auth-tab.active {
+		background: #128e50;
+		border-color: #128e50;
+		color: #fff;
+	}
+
+	.auth-panel {
+		display: none;
+	}
+
+	.auth-panel.active {
+		display: block;
+	}
+
+	.auth-form {
+		display: grid;
+		gap: 12px;
+	}
+
+	.auth-form label {
+		display: grid;
+		gap: 6px;
+		font-weight: 600;
+	}
+
+	.auth-form input {
+		width: 100%;
+		min-height: 40px;
+		border: 1px solid #444;
+		border-radius: 8px;
+		background: #101010;
+		color: #fff;
+		padding: 8px 10px;
+	}
+
+	.auth-form button {
+		margin-top: 4px;
+		min-height: 42px;
+		border: 0;
+		border-radius: 8px;
+		font-weight: 700;
+		background: #128e50;
+		color: #fff;
+		cursor: pointer;
+	}
+
+	.auth-error {
+		margin-bottom: 12px;
+		border: 1px solid #e06a6a;
+		background: rgba(224, 106, 106, 0.14);
+		color: #ffd8d8;
+		border-radius: 8px;
+		padding: 10px;
+	}
+
+	.auth-success {
+		margin-bottom: 12px;
+		border: 1px solid #47bd7d;
+		background: rgba(71, 189, 125, 0.14);
+		color: #cbffe3;
+		border-radius: 8px;
+		padding: 10px;
+	}
+
+	.orders-list {
+		display: grid;
+		gap: 16px;
+		margin-top: 24px;
+	}
+
+	.orders-tabs {
+		display: flex;
+		gap: 8px;
+		margin-top: 12px;
+	}
+
+	.orders-tab {
+		border: 1px solid #2d2d2d;
+		background: #121212;
+		color: #d8d8d8;
+		border-radius: 8px;
+		padding: 8px 12px;
+		cursor: pointer;
+	}
+
+	.orders-tab.active {
+		background: #128e50;
+		border-color: #128e50;
+		color: #fff;
+	}
+
+	.orders-panel {
+		display: none;
+	}
+
+	.orders-panel.active {
+		display: block;
+	}
+
+	.order-card {
+		display: grid;
+		grid-template-columns: 220px 1fr;
+		gap: 18px;
+		padding: 18px;
+		border-radius: 12px;
+		border: 1px solid #2d2d2d;
+		background: #121212;
+	}
+
+	.order-card__image {
+		width: 100%;
+		height: 150px;
+		object-fit: cover;
+		border-radius: 10px;
+		background: #0d0d0d;
+	}
+
+	.order-card__content {
+		display: grid;
+		gap: 10px;
+	}
+
+	.order-card__header {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		gap: 12px;
+	}
+
+	.order-card__title {
+		font-size: 1.35rem;
+		color: #fff;
+		text-decoration: none;
+	}
+
+	.order-card__title:hover {
+		color: #63d897;
+	}
+
+	.order-status {
+		padding: 6px 10px;
+		border-radius: 999px;
+		background: rgba(18, 142, 80, 0.15);
+		border: 1px solid rgba(18, 142, 80, 0.45);
+		color: #8ae9b2;
+		font-size: 0.85rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+	}
+
+	.order-meta {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 10px 16px;
+		color: #d3d3d3;
+	}
+
+	.order-items {
+		display: grid;
+		gap: 8px;
+		padding-top: 4px;
+	}
+
+	.order-item {
+		display: flex;
+		justify-content: space-between;
+		gap: 12px;
+		padding: 10px 12px;
+		border-radius: 8px;
+		background: #1a1a1a;
+		color: #e8e8e8;
+	}
+
+	.order-total {
+		font-size: 1.05rem;
+		font-weight: 700;
+		color: #63d897;
+	}
+
+	.empty-orders {
+		margin-top: 20px;
+		padding: 18px;
+		border-radius: 10px;
+		border: 1px dashed #3a3a3a;
+		background: #121212;
+		color: #d6d6d6;
+	}
+
+	@media (max-width: 760px) {
+		.order-card {
+			grid-template-columns: 1fr;
+		}
+
+		.order-meta {
+			grid-template-columns: 1fr;
+		}
+
+		.order-card__header,
+		.order-item {
+			flex-direction: column;
+		}
+	}
+</style>
 {% endblock %}
 
 
 {% block main %}
-<h1>Vé của tôi</h1>
+<section class="tickets-page">
+	<div class="tickets-card">
+		<h1 class="tickets-title">Vé của tôi</h1>
+
+		{% if user.is_authenticated %}
+			<p class="tickets-subtitle">Quản lý vé theo trạng thái thanh toán của bạn.</p>
+
+			<div class="orders-tabs" role="tablist" aria-label="Danh sách đơn vé">
+				<button type="button" class="orders-tab active" data-orders-tab="paid" aria-controls="orders-paid">
+					Đã thanh toán ({{ paid_orders|length }})
+				</button>
+				<button type="button" class="orders-tab" data-orders-tab="cancelled" aria-controls="orders-cancelled">
+					Đã hủy ({{ cancelled_orders|length }})
+				</button>
+			</div>
+
+			<div id="orders-paid" class="orders-panel active">
+			{% if paid_orders %}
+				<div class="orders-list">
+					{% for order in paid_orders %}
+						<article class="order-card">
+							{% if order.event and order.event.image %}
+								<a href="{% url 'event_detail' order.event.slug %}">
+									<img class="order-card__image" src="{{ order.event.image }}" alt="{{ order.event.name }}">
+								</a>
+							{% else %}
+								<div class="order-card__image"></div>
+							{% endif %}
+
+							<div class="order-card__content">
+								<div class="order-card__header">
+									<div>
+										{% if order.event %}
+											<a class="order-card__title" href="{% url 'event_detail' order.event.slug %}">{{ order.event.name }}</a>
+										{% else %}
+											<span class="order-card__title">Sự kiện không còn tồn tại</span>
+										{% endif %}
+									</div>
+									<span class="order-status">{{ order.get_status_display }}</span>
+								</div>
+
+								<div class="order-meta">
+									{% if order.event %}
+										<p><strong>Địa điểm:</strong> {{ order.event.venue.name }}</p>
+										<p><strong>Ngày sự kiện:</strong> {{ order.event.date|date:"d/m/Y" }}</p>
+									{% endif %}
+									<p><strong>Đặt lúc:</strong> {{ order.created_at|date:"d/m/Y H:i" }}</p>
+									<p><strong>Thanh toán:</strong> {{ order.get_payment_method_display }}</p>
+								</div>
+
+								<div class="order-items">
+									{% for item in order.items.all %}
+										<div class="order-item">
+											<span>{{ item.ticket_type.name }} x{{ item.quantity }}</span>
+											<span>{{ item.price|floatformat:0 }} VND / vé</span>
+										</div>
+									{% endfor %}
+								</div>
+
+								<p class="order-total">Tổng tiền: {{ order.total_price|floatformat:0 }} VND</p>
+							</div>
+						</article>
+					{% endfor %}
+				</div>
+			{% else %}
+				<div class="empty-orders">
+					Bạn chưa có đơn nào ở trạng thái đã thanh toán.
+				</div>
+			{% endif %}
+			</div>
+
+			<div id="orders-cancelled" class="orders-panel">
+			{% if cancelled_orders %}
+				<div class="orders-list">
+					{% for order in cancelled_orders %}
+						<article class="order-card">
+							{% if order.event and order.event.image %}
+								<a href="{% url 'event_detail' order.event.slug %}">
+									<img class="order-card__image" src="{{ order.event.image }}" alt="{{ order.event.name }}">
+								</a>
+							{% else %}
+								<div class="order-card__image"></div>
+							{% endif %}
+
+							<div class="order-card__content">
+								<div class="order-card__header">
+									<div>
+										{% if order.event %}
+											<a class="order-card__title" href="{% url 'event_detail' order.event.slug %}">{{ order.event.name }}</a>
+										{% else %}
+											<span class="order-card__title">Sự kiện không còn tồn tại</span>
+										{% endif %}
+									</div>
+									<span class="order-status">{{ order.get_status_display }}</span>
+								</div>
+
+								<div class="order-meta">
+									{% if order.event %}
+										<p><strong>Địa điểm:</strong> {{ order.event.venue.name }}</p>
+										<p><strong>Ngày sự kiện:</strong> {{ order.event.date|date:"d/m/Y" }}</p>
+									{% endif %}
+									<p><strong>Đặt lúc:</strong> {{ order.created_at|date:"d/m/Y H:i" }}</p>
+									<p><strong>Thanh toán:</strong> {{ order.get_payment_method_display }}</p>
+								</div>
+
+								<div class="order-items">
+									{% for item in order.items.all %}
+										<div class="order-item">
+											<span>{{ item.ticket_type.name }} x{{ item.quantity }}</span>
+											<span>{{ item.price|floatformat:0 }} VND / vé</span>
+										</div>
+									{% endfor %}
+								</div>
+
+								<p class="order-total">Tổng tiền: {{ order.total_price|floatformat:0 }} VND</p>
+							</div>
+						</article>
+					{% endfor %}
+				</div>
+			{% else %}
+				<div class="empty-orders">
+					Bạn chưa có đơn nào ở trạng thái đã hủy.
+				</div>
+			{% endif %}
+			</div>
+		{% else %}
+			<p class="tickets-subtitle">Vui lòng đăng nhập hoặc đăng ký để xem vé của bạn.</p>
+
+			{% if auth_success %}
+				<div class="auth-success">{{ auth_success }}</div>
+			{% endif %}
+
+			{% if auth_error %}
+				<div class="auth-error">{{ auth_error }}</div>
+			{% endif %}
+
+			<div class="auth-tabs" role="tablist" aria-label="Xác thực tài khoản">
+				<button type="button" class="auth-tab {% if auth_mode == 'login' %}active{% endif %}" data-tab="login" aria-controls="auth-login">
+					Đăng nhập
+				</button>
+				<button type="button" class="auth-tab {% if auth_mode == 'register' %}active{% endif %}" data-tab="register" aria-controls="auth-register">
+					Đăng ký
+				</button>
+			</div>
+
+			<div id="auth-login" class="auth-panel {% if auth_mode == 'login' %}active{% endif %}">
+				<form method="post" class="auth-form">
+					{% csrf_token %}
+					<input type="hidden" name="action" value="login">
+					<input type="hidden" name="next" value="{{ next_url }}">
+
+					<label>
+						Email
+						<input type="email" name="email" value="{{ form_values.email }}" required>
+					</label>
+
+					<label>
+						Mật khẩu
+						<input type="password" name="password" required>
+					</label>
+
+					<button type="submit">Đăng nhập</button>
+				</form>
+			</div>
+
+			<div id="auth-register" class="auth-panel {% if auth_mode == 'register' %}active{% endif %}">
+				<form method="post" class="auth-form">
+					{% csrf_token %}
+					<input type="hidden" name="action" value="register">
+					<input type="hidden" name="next" value="{{ next_url }}">
+
+					<label>
+						Email
+						<input type="email" name="email" value="{{ form_values.email }}" required>
+					</label>
+
+					<label>
+						Mật khẩu
+						<input type="password" name="password" required>
+					</label>
+
+					<label>
+						Xác nhận mật khẩu
+						<input type="password" name="password_confirm" required>
+					</label>
+
+					<button type="submit">Đăng ký</button>
+				</form>
+			</div>
+		{% endif %}
+	</div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+	const tabButtons = document.querySelectorAll('.auth-tab');
+	const panels = {
+		login: document.getElementById('auth-login'),
+		register: document.getElementById('auth-register')
+	};
+
+	const orderTabButtons = document.querySelectorAll('.orders-tab');
+	const orderPanels = {
+		paid: document.getElementById('orders-paid'),
+		cancelled: document.getElementById('orders-cancelled')
+	};
+
+	tabButtons.forEach((button) => {
+		button.addEventListener('click', () => {
+			const target = button.dataset.tab;
+
+			tabButtons.forEach((btn) => btn.classList.remove('active'));
+			Object.values(panels).forEach((panel) => panel.classList.remove('active'));
+
+			button.classList.add('active');
+			panels[target]?.classList.add('active');
+		});
+	});
+
+	orderTabButtons.forEach((button) => {
+		button.addEventListener('click', () => {
+			const target = button.dataset.ordersTab;
+
+			orderTabButtons.forEach((btn) => btn.classList.remove('active'));
+			Object.values(orderPanels).forEach((panel) => panel?.classList.remove('active'));
+
+			button.classList.add('active');
+			orderPanels[target]?.classList.add('active');
+		});
+	});
+
+	const checkoutRedirect = sessionStorage.getItem("checkoutRedirect");
+	if (checkoutRedirect && document.querySelector('.auth-panel.active')) {
+		const subtitleEl = document.querySelector('.tickets-subtitle');
+		if (subtitleEl) {
+			const msg = document.createElement('p');
+			msg.style.color = '#4dba83';
+			msg.style.marginTop = '12px';
+			msg.textContent = 'Sau khi đăng nhập, bạn sẽ được chuyển đến trang thanh toán.';
+			subtitleEl.parentNode.insertBefore(msg, subtitleEl.nextSibling);
+		}
+	}
+</script>
 {% endblock %}
