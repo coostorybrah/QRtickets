@@ -56,4 +56,11 @@ def logout(request):
 
 @login_required(login_url='login')
 def dashboard(request):
-    return render(request,'accounts/dashboard.html')
+    from orders.models import Order
+    orders = Order.objects.filter(
+        user=request.user, is_ordered=True
+    ).prefetch_related('items__product').order_by('-created_at')
+    context = {
+        'orders': orders,
+    }
+    return render(request, 'accounts/dashboard.html', context)

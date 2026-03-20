@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'accounts',
     'store',
     'carts',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -136,6 +137,17 @@ from django.contrib.messages import constants as messages
 
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
-} 
+}
+
+# Email configuration (Gmail SMTP)
+# Replace with your Gmail address and an App Password (not your regular password).
+# Generate one at: https://myaccount.google.com/apppasswords
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'buithanhthao284@gmail.com'
+EMAIL_HOST_PASSWORD = 'zaui phbd earp zwiz'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 

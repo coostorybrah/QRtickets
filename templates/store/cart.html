@@ -46,11 +46,11 @@
 					<div class="col"> 
 						<div class="input-group input-spinner">
 							<div class="input-group-prepend">
-							<a href = "{% url 'remove_cart' cart_item.product.id %}" class="btn btn-light" type="button" id="button-plus"> <i class="fa fa-minus"></i> </a>
+							<a href = "{% url 'remove_cart' cart_item.product.id %}" class="btn btn-light" type="button" id="button-plus" data-preserve-cart="true"> <i class="fa fa-minus"></i> </a>
 							</div>
 							<input type="text" class="form-control"  value="{{cart_item.quantity}}">
 							<div class="input-group-append">
-							<a href = "{% url 'add_cart' cart_item.product.id %}" class="btn btn-light" type="button" id="button-minus"> <i class="fa fa-plus"></i> </a>
+							<a href = "{% url 'add_cart' cart_item.product.id %}" class="btn btn-light" type="button" id="button-minus" data-preserve-cart="true"> <i class="fa fa-plus"></i> </a>
 							</div>
 						</div> <!-- input-group.// -->
 					</div> <!-- col.// -->
@@ -62,7 +62,7 @@
 		</div> <!-- price-wrap .// -->
 	</td>
 	<td class="text-right"> 
-	<a href = "{% url 'remove_cart_item' cart_item.product.id %}" class="btn btn-danger"> Remove</a>
+	<a href = "{% url 'remove_cart_item' cart_item.product.id %}" class="btn btn-danger" data-preserve-cart="true"> Remove</a>
 	</td>
     {% endfor %}
 </tr>
@@ -91,7 +91,7 @@
 			<p class="text-center mb-3">
 				<img src="./images/misc/payments.png" height="26">
 			</p>
-			<a href="{% url 'checkout' %}" class="btn btn-primary btn-block"> Thanh toán </a>
+			<div id="paypal-button-container"></div>
 			<a href="{% url 'store' %}" class="btn btn-light btn-block">Xem các sự kiện khác</a>
 		</div> <!-- card-body.// -->
 		</div> <!-- card.// -->
@@ -106,5 +106,94 @@
 </div> <!-- container .//  -->
 </section>
 <!-- ========================= SECTION CONTENT END// ========================= -->
+
+{% if total > 0 %}
+<script>
+	const amount = "{{ grand_total }}";
+	let preserveCartOnExit = false;
+
+	function getCookie(name) {
+		const value = `; ${document.cookie}`;
+		const parts = value.split(`; ${name}=`);
+		if (parts.length === 2) {
+			return parts.pop().split(';').shift();
+		}
+		return '';
+	}
+
+	function clearCartOnExit() {
+		if (preserveCartOnExit || !amount || amount === '0') {
+			return;
+		}
+
+		navigator.sendBeacon(
+			"{% url 'clear_cart' %}",
+			new URLSearchParams({ csrfmiddlewaretoken: getCookie('csrftoken') })
+		);
+	}
+
+	document.querySelectorAll('[data-preserve-cart="true"]').forEach(function(element) {
+		element.addEventListener('click', function() {
+			preserveCartOnExit = true;
+		});
+	});
+
+	window.addEventListener('pagehide', clearCartOnExit);
+  // Render the PayPal button into #paypal-button-container
+  paypal.Buttons({
+
+	style: {
+			color: 'blue',
+			shape: 'rect',
+			label: 'pay',
+			height: 40
+	},
+
+    // Set up the transaction
+    createOrder: function(data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: amount
+          }
+        }]
+      });
+    },
+
+    // Finalize the transaction
+		onApprove: function(data, actions) {
+      return actions.order.capture().then(function(details) {
+				preserveCartOnExit = true;
+
+				return fetch("{% url 'complete_order' %}", {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						'X-CSRFToken': getCookie('csrftoken')
+					},
+					body: JSON.stringify({
+						order_id: data.orderID,
+						payer_name: details.payer.name.given_name
+					})
+				})
+				.then(function(response) {
+					if (!response.ok) {
+						throw new Error('Could not complete the order.');
+					}
+					return response.json();
+				})
+				.then(function(response) {
+					window.location.href = response.redirect_url;
+				})
+				.catch(function(error) {
+					preserveCartOnExit = false;
+					alert(error.message);
+				});
+      });
+    }
+
+  }).render('#paypal-button-container');
+</script>
+{% endif %}
 
 {% endblock %}
