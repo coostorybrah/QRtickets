@@ -92,7 +92,8 @@
         <h1>TỔNG TIỀN</h1>
 
         <p id="tongTien">—</p>
-        <button id="thanhToanBtn" type="button">Thanh toán</button>
+
+        <div id="paypal-button-container"></div>
 
     </div>
 
@@ -107,6 +108,30 @@
 
 <script>
 const event_id = "{{ event_id }}";
+
+  // Render the PayPal button into #paypal-button-container
+  paypal.Buttons({
+
+    // Set up the transaction
+    createOrder: function(data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: '88.44'
+          }
+        }]
+      });
+    },
+
+    // Finalize the transaction
+    onApprove: function(data, actions) {
+      return actions.order.capture().then(function(details) {
+        // Show a success message to the buyer
+        alert('Transaction completed by ' + details.payer.name.given_name + '!');
+      });
+    }
+
+  }).render('#paypal-button-container');
 </script>
 
 <script type="module" src="{% static 'js/chitietsukien.js' %}"></script>

@@ -24,7 +24,6 @@ if (event && !event.error) {
 
     const quantitySelect = document.getElementById("soLuongVe");
     const totalPriceEl = document.getElementById("tongTien");
-    const paymentBtn = document.getElementById("thanhToanBtn");
 
     let selectedTicket = null;
 
@@ -38,6 +37,9 @@ if (event && !event.error) {
         const totalPrice = selectedTicket.gia * quantity;
 
         totalPriceEl.innerText = formatPrice(totalPrice);
+        
+        // Update the global amount variable for PayPal
+        window.amount = totalPrice.toFixed(2);
     };
 
     let ticketsHTML =
@@ -65,7 +67,9 @@ if (event && !event.error) {
         });
     });
 
-    quantitySelect.addEventListener("change", syncPriceSummary);
+    quantitySelect.addEventListener("change", () => {
+        syncPriceSummary();
+    });
 
     const firstTicketRow = document.querySelector(".ticket-row");
     if (firstTicketRow) {
@@ -77,28 +81,5 @@ if (event && !event.error) {
         syncPriceSummary();
     }
 
-    paymentBtn.addEventListener("click", async () => {
-        if (!selectedTicket) {
-            alert("Vui lòng chọn hạng vé.");
-            return;
-        }
-
-        const quantity = Number(quantitySelect.value);
-        const checkoutUrl = new URL("/checkout/", window.location.origin);
-        checkoutUrl.searchParams.set("event_id", id);
-        checkoutUrl.searchParams.set("price", String(selectedTicket.gia));
-        checkoutUrl.searchParams.set("quantity", String(quantity));
-
-        const meResponse = await fetch("/api/me/");
-        const meData = await meResponse.json();
-
-        if (!meData.loggedIn) {
-            sessionStorage.setItem("checkoutRedirect", checkoutUrl.toString());
-            window.location.href = "/my-tickets/";
-            return;
-        }
-
-        window.location.href = checkoutUrl.toString();
-    });
     document.title = "QRticket | " + event.ten;
 }
