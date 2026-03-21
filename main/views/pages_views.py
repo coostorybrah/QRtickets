@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+
 from events.models import Event, Venue, Category
 
 import json
@@ -12,16 +14,19 @@ def event_detail(request, event_id):
     return render(request, "chitietsukien.html", {"event_id": event_id})
 
 # MY TICKETS PAGE 
+@login_required("/")
 def my_tickets(request):
     return render(request, "vecuatoi.html")
 
 
 # USER PAGE
+@login_required("/")
 def user_page(request):
     return render(request, "userpage.html")
 
 
 # MY EVENTS PAGE (CẤM XÓA)
+@login_required("/")
 def my_events(request):
     return render(request, "sukiencuatoi.html")
 

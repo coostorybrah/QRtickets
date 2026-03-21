@@ -30,6 +30,7 @@ class Command(BaseCommand):
             user, created = User.objects.get_or_create(
                 username = f"customer{i+1}",
                 defaults = {
+                    "email": f"customer{i+1}@gmail.com",
                     "is_staff": False
                 }
             )
@@ -37,7 +38,10 @@ class Command(BaseCommand):
             if created:
                 user.set_password("password123")
                 user.save()
-
+            if not user.email:
+                user.email = f"customer{i+1}@gmail.com"
+                user.save()
+                
             customers.append(user)
     
         # ADMINS
@@ -45,20 +49,28 @@ class Command(BaseCommand):
         for i in range(2):
             user, created = User.objects.get_or_create(
                 username = f"admin{i+1}",
-                defaults = {"is_staff": True}
+                defaults = {
+                    "email": f"admin{i+1}@gmail.com",
+                    "is_staff": True
+                    }
             )
 
             if created:
                 user.set_password("password123")
                 user.save()
+            if not user.email:
+                user.email = f"admin{i+1}@gmail.com"
+                user.save()
+
             admins.append(user)
 
         # ORGANIZERS
         organizers = []
         for i in range(10):
             user, created = User.objects.get_or_create(
-                username = f"organizer{i+1}",
-                defaults = {
+                username=f"organizer{i+1}",
+                defaults={
+                    "email": f"organizer{i+1}@gmail.com",
                     "is_staff": False
                 }
             )
@@ -66,13 +78,21 @@ class Command(BaseCommand):
             if created:
                 user.set_password("password123")
                 user.save()
+            else:
+                if not user.email:
+                    user.email = f"organizer{i+1}@gmail.com"
+                    user.save()
 
-            organizer, _ = Organizer.objects.get_or_create(
-                user = user,
-                defaults = {
+            organizer, created = Organizer.objects.get_or_create(
+                user=user,
+                defaults={
                     "display_name": f"Organizer{i+1}"
                 }
             )
+
+            if not organizer.display_name:
+                organizer.display_name = f"Organizer{i+1}"
+                organizer.save()
 
             organizers.append(organizer)
 

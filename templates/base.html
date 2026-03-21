@@ -34,37 +34,35 @@
     </div>
         
     <div class="others">
-
-        <a class="eventManager wrapper" href="{% url 'my_events' %}">
-            Tạo sự kiện
-        </a>
-
-        <a class="ticketManager wrapper" href="{% url 'my_tickets' %}">
-            Vé của tôi
-        </a>
-    
         <div class="auth">
-        {% if user %}
-            <div id="userMenu" class="dropdown-hover">
-                <a id="userWrapper" href="{% url 'user_page' %}">
-                    <img id="avatar" src="{{ user.avatar | default:'/static/images/avatars/default-avatar.png' }}">
-                    <span id="avatarText">Tài khoản</span>
+            {% if user.is_authenticated %}
+                <a class="eventManager wrapper" href="{% url 'my_events' %}">
+                    Tạo sự kiện
                 </a>
+        
+                <a class="ticketManager wrapper" href="{% url 'my_tickets' %}">
+                    Vé của tôi
+                </a>
+                <div id="userMenu" class="dropdown-hover">
+                    <a id="userWrapper" href="{% url 'user_page' %}">
+                        <img id="avatar" src="{{ user.avatar | default:'/static/images/avatars/default-avatar.png' }}">
+                        <span id="avatarText">Tài khoản</span>
+                    </a>
 
-                <div class="dropdown">
-                    <a href="{% url 'my_tickets' %}">Vé của tôi</a>
-                    <a href="{% url 'user_page' %}">Tài khoản của tôi</a>
-                    <a id="logoutBtn">Đăng xuất</a>
+                    <div class="dropdown">
+                        <a href="{% url 'my_tickets' %}">Vé của tôi</a>
+                        <a href="{% url 'user_page' %}">Tài khoản của tôi</a>
+                        <a id="logoutBtn">Đăng xuất</a>
+                    </div>
                 </div>
-            </div>
 
-        {% else %}
-            <div id="guestUI" class="wrapper modalTrigger">
-                <button type="button" class="modalTrigger--login" data-open="mdl-login">
-                    Đăng nhập / Đăng ký
-                </button>
-            </div>
-        {% endif %}
+            {% else %}
+                <div id="guestUI" class="wrapper modalTrigger">
+                    <button type="button" class="modalTrigger--login" data-open="mdl-login">
+                        Đăng nhập / Đăng ký
+                    </button>
+                </div>
+            {% endif %}
         </div>
     </div>
 </header>

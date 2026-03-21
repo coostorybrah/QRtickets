@@ -3,9 +3,47 @@
 
 
 {% block style %}
-    
+    <link rel="stylesheet" href="{% static 'css/userpage.css' %}">
+{% endblock %}
+
+{% block title %} 
+    <title>QRticket - My Profile</title>
 {% endblock %}
 
 {% block main %}
-    
+    <article id="info">
+        <h1>Thông tin tài khoản</h1>
+        <hr>
+        <form id="userInfo">
+            <div class="avatar-wrapper">
+                <img id="avatar">
+            </div>
+
+            <div class="user-wrapper">
+                <p>Username:</p>
+                <input type="text" name="username" placeholder="Nhập thông tin vào đây">
+            </div>
+
+            <div class="email-wrapper">
+                <p>Email:</p>
+                <input type="email" name="username" pattern=".+@gmail\.com" placeholder="Nhập thông tin vào đây" disabled>
+            </div>
+            <button type="submit">Cập nhật thông tin</button>
+        </form>
+    </article>
+
+    <article id="changePassword">
+        <h1>Thay đổi mật khẩu</h1>
+        <hr>
+        <div class="passwords-wrapper">
+            <p>Mật khẩu cũ</p>
+            <input type="password" name="password" placeholder="Nhập mật khẩu hiện tại">
+
+            <p>Mật khẩu mới</p>
+            <input type="password" name="newPassword" placeholder="Nhập mật khẩu mới">
+
+            <p>Xác nhận mật khẩu mới</p>
+            <input type="password" name="newPassword_confirm" placeholder="Xác nhận mật khẩu mới">
+        </div>
+    </article>
 {% endblock %}
