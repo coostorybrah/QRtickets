@@ -1,5 +1,4 @@
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate
 from django.contrib.auth import get_user_model
 from django.contrib.auth import login, logout
@@ -11,7 +10,6 @@ DEFAULT_AVATAR = "avatars/default-avatar.png"
 
 
 # ĐĂNG KÝ
-@csrf_exempt
 def api_signup(request):
     if request.method != "POST":
         return JsonResponse({"error": "POST required"}, status=400)
@@ -50,7 +48,6 @@ def api_signup(request):
 
 
 # ĐĂNG NHẬP
-@csrf_exempt
 def api_login(request):
     if request.method != "POST":
         return JsonResponse({"error": "POST required"}, status=400)
@@ -87,7 +84,6 @@ def api_me(request):
 
 
 # ĐĂNG XUẤT
-@csrf_exempt
 def api_logout(request):
     logout(request)
     return JsonResponse({"success": True})

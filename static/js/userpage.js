@@ -1,3 +1,4 @@
+// AVATAR UPLOAD
 export function initAvatarUpload() {
     const form = document.getElementById("avatarForm");
     if (!form) return;
@@ -34,6 +35,8 @@ export function initAvatarUpload() {
         }
     });
 }
+
+
 
 function getCSRFToken() {
     const name = "csrftoken";
