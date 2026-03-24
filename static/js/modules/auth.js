@@ -1,5 +1,4 @@
     export function initSignUp(){
-
         const form = document.getElementById("signUp-form");
         if (!form) return;
 
@@ -35,7 +34,6 @@
     }
 
     export function initLogin(){
-
         const form = document.getElementById("login-form");
         if (!form) return;
 
@@ -60,7 +58,7 @@
         });
     }
 
-    function getCSRFToken() {
+    function getCSRFToken(){
         const name = "csrftoken";
         const cookies = document.cookie.split(";");
 
@@ -74,7 +72,6 @@
     }
 
     async function sendAuthRequest(url, payload){
-
         const result = await fetch(url,{
             method:"POST",
             headers:{

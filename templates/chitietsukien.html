@@ -84,11 +84,9 @@
 
 
 {% block scripts %}
+    <script>
+        const event_id = "{{ event_id }}";
+    </script>
 
-<script>
-const event_id = "{{ event_id }}";
-</script>
-
-<script type="module" src="{% static 'js/chitietsukien.js' %}"></script>
-
+    <script type="module" src="{% static 'js/chitietsukien.js' %}"></script>
 {% endblock %}
