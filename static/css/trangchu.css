@@ -184,19 +184,14 @@ header .others__modalTrigger {
     max-width: 100%;
   }
 }
-.modalTrigger--login {
+.modal-trigger {
   background-color: transparent;
-  color: white;
   outline: none;
   border: none;
   padding: 2px;
+  margin: 5px;
   font-size: medium;
   font-weight: bold;
-  cursor: pointer;
-}
-.modalTrigger--signUp {
-  width: 160px;
-  align-self: center;
   cursor: pointer;
 }
 
@@ -318,6 +313,25 @@ header .others__modalTrigger {
   flex-grow: 0;
   font-style: italic;
 }
+.login .modal-switch {
+  padding: 5px;
+  margin-bottom: 5px;
+  color: #999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-style: italic;
+  font-weight: lighter;
+  font-size: 1rem;
+}
+.login .modal-switch .modal-trigger.in-modal {
+  color: #4dba83;
+  padding: 0;
+  margin: 5px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
 
 .dropdown-wrapper {
   position: relative;
@@ -415,6 +429,22 @@ header .others__modalTrigger {
   object-fit: cover;
   transition: ease-in;
   transition-duration: 0.2s;
+}
+
+#guestUI {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  cursor: default;
+}
+#guestUI .modal-trigger {
+  color: white;
+}
+
+.text-separator {
+  font-size: 1.5rem;
+  cursor: default;
 }
 
 .cards-container {

@@ -86,3 +86,22 @@ $avatar_size: 32px;
     transition-duration: 0.2s;
 }
 
+#guestUI {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    cursor: default;
+
+    .modal-trigger {
+        color: v.$light_text_color;
+    }
+
+}
+
+.text-separator {
+    font-size: 1.5rem;
+    cursor: default;
+}
+

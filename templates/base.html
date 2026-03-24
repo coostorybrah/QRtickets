@@ -79,9 +79,15 @@
                     </div>
 
                 {% else %}
-                    <div id="guestUI" class="wrapper modalTrigger">
-                        <button type="button" class="modalTrigger--login" data-open="mdl-login">
-                            Đăng nhập / Đăng ký
+                    <div id="guestUI" class="wrapper modal-trigger">
+                        <button type="button" class="modal-trigger" data-open="mdl-login">
+                            Đăng nhập
+                        </button>
+
+                        <span class="text-separator">|</span>
+
+                        <button type="button" class="modal-trigger" data-open="mdl-signUp">
+                            Đăng ký
                         </button>
                     </div>
                 {% endif %}
@@ -108,16 +114,19 @@
             <div class="login__body">
                 <form class="login" id="login-form">
                     {% csrf_token %}
-                    <input name="username" type="text" placeholder="Email hoặc số điện thoại" required>
+                    <input name="username" type="text" placeholder="Username hoặc email" required>
                     <input name="password" type="password" placeholder="Mật khẩu" required>
                     <button type="submit" class="login__button">
                         Đăng nhập
                     </button>
                 </form>
 
-                <button type="button" class="modalTrigger--signUp" data-open="mdl-signUp">
-                    Chưa có tài khoản?
-                </button>
+                <div class="modal-switch">
+                    <div>Chưa có tài khoản?</div>
+                    <button type="button" class="modal-trigger in-modal" data-open="mdl-signUp">
+                        Đăng ký ngay
+                    </button>
+                </div>
 
             </div>
         </div>
@@ -144,9 +153,12 @@
                     </button>
                 </form>
 
-                <button type="button" class="modalTrigger--signUp" data-open="mdl-login">
-                    Đã có tài khoản?
-                </button>
+                <div class="modal-switch">
+                    <div>Đã có tài khoản?</div>
+                    <button type="button" class="modal-trigger in-modal" data-open="mdl-login">
+                        Đăng nhập ngay
+                    </button>
+                </div>
 
             </div>
         </div>

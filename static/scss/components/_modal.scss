@@ -6,26 +6,18 @@
 // SIZE VARIABLES
 
 // MODAL TRIGGER
-.modalTrigger {
-    &--login {
-        background-color: transparent;
-        color: $light_text_color;
+.modal-trigger {
+    background-color: transparent;
 
-        outline: none;
-        border: none;
-        padding: 2px;
+    outline: none;
+    border: none;
+    padding: 2px;
+    margin: 5px;
 
-        font-size: medium;
-        font-weight: bold;
+    font-size: medium;
+    font-weight: bold;
 
-        cursor: pointer;
-    }
-
-    &--signUp{
-        width: 160px;
-        align-self: center;
-        cursor: pointer;
-    }
+    cursor: pointer;
 }
 
 // MODAL BACKGROUND

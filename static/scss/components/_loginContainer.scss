@@ -104,4 +104,29 @@
             font-style: italic;
         }
     }
+
+    .modal-switch {
+        padding: 5px;
+        margin-bottom: 5px;
+        color: v.$inactive_text_color;
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        font-style: italic;
+        font-weight: lighter;
+        font-size: 1rem;
+
+        .modal-trigger.in-modal {
+            color: v.$active_text_color;
+
+            padding: 0;
+            margin: 5px;
+
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+    }
 }
