@@ -25,6 +25,11 @@ class Product(models.Model):
     def get_url(self):
         return reverse("product_detail", args=[self.category.slug, self.slug])
 
+class VariationManager(models.Manager):
+    def prices(self):
+        return super(VariationManager, self).filter(variation_category='price', is_active=True)
+
+
 class Variation(models.Model):
 
     variation_category_choice = (
@@ -37,7 +42,7 @@ class Variation(models.Model):
     is_active           = models.BooleanField(default=True)
     created_date        = models.DateTimeField(auto_now=True)
 
-    #objects = VariationManager()
+    objects = VariationManager()
 
-    def __unicode__(self):
-        return self.product
+    def __str__(self):
+        return self.variation_value

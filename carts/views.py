@@ -3,14 +3,14 @@ import json
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import EmailMessage
 from django.db import transaction
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.views.decorators.http import require_POST
 
 from carts.models import Cart, CartItem
 from orders.models import Order, OrderItem
-from store.models import Product
+from store.models import Product, Variation
 
 # Create your views here.
 
@@ -30,7 +30,22 @@ def _clear_cart(cart):
     CartItem.objects.filter(cart=cart).delete()
 
 def add_cart(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
+
+    product = Product.objects.get(id=product_id) #get the product
+    product_variation = [] 
+    if request.method == 'POST':
+        for item in request.POST:
+            key = item
+            value = request.POST[key]
+            print(key, value)
+
+            try:
+                variation = Variation.objects.get(product=product, variation_category__iexact=key, variation_value__iexact=value)
+                product_variation.append(variation) #store this values inside a cart item 
+            except:
+                pass
+
+    
     cart = _get_or_create_cart(request)
 
     existing_items = CartItem.objects.filter(cart=cart, is_active=True)
@@ -40,18 +55,21 @@ def add_cart(request, product_id):
 
     try:
         cart_item = CartItem.objects.get(product=product, cart=cart)
-        if cart_item.quantity < product.stock:
-            cart_item.quantity += 1
-            cart_item.save()
+        if len(product_variation) > 0:
+            for item in product_variation:
+                cart_item.variations.add(item)
+        cart_item.quantity += 1
+        cart_item.save()
     except CartItem.DoesNotExist:
         cart_item = CartItem.objects.create(
             product=product,
             quantity=1,
             cart=cart,
         )
-    next_url = request.GET.get('next', 'cart')
-    if next_url == 'checkout':
-        return redirect('checkout')
+        if len(product_variation) > 0:
+            for item in product_variation:
+                cart_item.variations.add(item)
+    cart_item.save()
     return redirect('cart')
 
 
