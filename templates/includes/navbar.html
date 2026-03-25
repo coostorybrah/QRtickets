@@ -1,56 +1,38 @@
 ﻿{% load static %}
 
-<header class="site-header">
-    <div class="bg-success text-white" style="background:#0f8e55;">
-        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center py-2 gap-2">
-            <div class="d-flex align-items-center gap-3 w-100 flex-wrap">
+<header class="site-header" style="background:#00b81d;">
+    <div class="text-white" style="background:#00b81d;">
+        <div class="container d-flex flex-nowrap justify-content-between align-items-center py-2 gap-3">
+            <div class="d-flex align-items-center gap-3 flex-grow-1" style="min-width:0;">
                 <a href="{% url 'home' %}" class="h4 mb-0 text-white" style="font-weight:700; letter-spacing:0.02em; text-decoration:none;">QRticket</a>
-                <form method="get" action="{% url 'store' %}" class="d-none d-sm-flex w-100" style="max-width:520px;">
+                <form method="get" action="{% url 'store' %}" class="d-none d-sm-flex flex-grow-1" style="max-width:780px; min-width:0;">
                     <div class="input-group">
-                        <input name="keyword" class="form-control" placeholder="Tìm kiếm..." value="{{ request.GET.keyword }}" style="border-radius:30px 0 0 30px;">
+                        <input name="keyword" class="form-control navbar-search-input" placeholder="Tìm kiếm..." value="{{ request.GET.keyword }}" style="border-radius:30px 0 0 30px; background:#ffffff !important; color:#1a1a1a !important; border-color:#ffffff !important;">
                         <div class="input-group-append">
-                            <button class="btn btn-light" type="submit" style="border-radius:0 30px 30px 0;"><i class="fa fa-search"></i></button>
+                            <button class="btn btn-light navbar-search-button" type="submit" style="border-radius:0 30px 30px 0; background:#ffffff !important; color:#666666 !important; border-color:#ffffff !important;"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
                 </form>
             </div>
-            <div class="d-flex align-items-center gap-2">
-                <a href="{% url 'store' %}" class="btn btn-sm btn-light text-success" style="font-weight:700;">Tạo sự kiện</a>
-                <a href="{% url 'dashboard' %}" class="text-white" style="font-weight:600;">Vé của tôi</a>
-                <span class="text-white">|</span>
+            <div class="d-flex align-items-center flex-nowrap" style="gap:24px; white-space:nowrap;">
+                <a href="{% url 'dashboard' %}" class="text-white" style="font-weight:600; white-space:nowrap;">Vé của tôi</a>
+                
                 {% if user.id %}
-                    <a href="{% url 'logout' %}" class="text-white" style="font-weight:700;">Đăng xuất</a>
+                    <a href="{% url 'logout' %}" class="text-white" style="font-weight:700; white-space:nowrap;">Đăng xuất</a>
                 {% else %}
-                    <a href="{% url 'login' %}" class="text-white" style="font-weight:700;">Đăng nhập</a>
-                    <span class="text-white">/</span>
-                    <a href="{% url 'register' %}" class="text-white" style="font-weight:700;">Đăng ký</a>
+                    <a href="{% url 'login' %}" class="text-white" style="font-weight:700; white-space:nowrap;">Đăng nhập</a>
+                    
+                    <a href="{% url 'register' %}" class="text-white" style="font-weight:700; white-space:nowrap;">Đăng ký</a>
                 {% endif %}
             </div>
         </div>
         {% if request.resolver_match and request.resolver_match.url_name != 'login' and request.resolver_match.url_name != 'register' %}
-        <div class="bg-dark py-1">
+        <div class="py-1" style="background:#00b81d;">
             <div class="container d-flex flex-wrap align-items-center">
                 {% for category in links %}
-                    <a href="{{ category.get_url }}" class="text-white" style="text-decoration:none; font-weight:600;">
-                        {% if category.category_name|lower == 'thao' %}
-                            Thể thao
-                        {% elif category.category_name|lower == 'tham quan trai nghiem' %}
-                            Tham quan trải nghiệm
-                        {% elif category.category_name|lower == 'san khau nghe thuat' %}
-                            Sân khấu nghệ thuật
-                        {% elif category.category_name|lower == 'nhac song' %}
-                            Nhạc sống
-                        {% elif category.category_name|lower == 'hoi thao' %}
-                            Hội thảo
-                        {% elif category.category_name|lower == 'khac' %}
-                            Khác
-                        {% else %}
-                            {{ category.category_name }}
-                        {% endif %}
+                    <a href="{{ category.get_url }}" class="text-white mr-4" style="text-decoration:none; font-weight:600;">
+                        {{ category.category_name|capfirst }}
                     </a>
-                    {% if not forloop.last %}
-                        <span class="text-white px-2" style="font-weight:700;">|</span>
-                    {% endif %}
                 {% endfor %}
             </div>
         </div>

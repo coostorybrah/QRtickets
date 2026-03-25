@@ -1,4 +1,5 @@
 from django.db import models
+import re
 from store.models import Product, Variation
 
 # Create your models here.
@@ -17,8 +18,20 @@ class CartItem(models.Model):
     quantity = models.IntegerField()
     is_active = models.BooleanField(default=True)
 
+    def unit_price(self):
+        selected_price = self.variations.filter(variation_category='price').first()
+        if selected_price:
+            digits = re.sub(r'\D', '', str(selected_price.variation_value))
+            if digits:
+                return int(digits)
+            try:
+                return int(selected_price.variation_value)
+            except (TypeError, ValueError):
+                pass
+        return self.product.price
+
     def sub_total(self):
-        return self.product.price * self.quantity
+        return self.unit_price() * self.quantity
 
     def __unicode__(self):
         return self.product 

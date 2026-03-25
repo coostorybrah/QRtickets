@@ -2,7 +2,41 @@
 
 {% block content%}
 
-{% load static %}
+{% load static currency %}
+
+<style>
+	.section-pagetop .title-page,
+	.card-product-grid .title,
+	.card-product-grid .price,
+	.filter-group label,
+	.list-menu a,
+	.border-bottom,
+	.border-bottom span,
+	.border-bottom b {
+		color: #ffffff !important;
+	}
+
+	.card-product-grid .price {
+		font-weight: 700;
+	}
+
+	.card-product-grid .info-wrap {
+		background: #101010 !important;
+	}
+
+	.card-product-grid .title:hover,
+	.list-menu a:hover {
+		color: #7ff2b0 !important;
+	}
+
+	.select-dark,
+	.select-dark:focus {
+		background: #151515 !important;
+		color: #ffffff !important;
+		border-color: #2a2a2a !important;
+		box-shadow: none !important;
+	}
+</style>
 
 <!-- ========================= SECTION PAGETOP ========================= -->
 <section class="section-pagetop bg">
@@ -32,9 +66,9 @@
 			<div class="card-body">
 				
 				<ul class="list-menu">
-				<li><a href="{%url 'store'%}">All products</a></li>
+				<li><a href="{%url 'store'%}">Tất cả sự kiện</a></li>
 				{% for category in links%}
-				<li><a href="{{category.get_url}}">{{category.category_name}}</a></li>
+				<li><a href="{{category.get_url}}">{{ category.category_name|capfirst }}</a></li>
 				{% endfor %}
 				</ul>
 
@@ -57,26 +91,26 @@
 				<div class="form-group col-md-6">
 				  <label>Min</label>
 				  <!-- <input class="form-control" placeholder="$0" type="number"> -->
-				  	<select class="mr-2 form-control">
-						<option value="0">100 000 VND</option>
-						<option value="50">100 000 VND</option>
-						<option value="100">100 000 VND</option>
-						<option value="150">100000VND</option>
-						<option value="200">100000VND</option>
-						<option value="500">100000VND</option>
-						<option value="1000">10 000 000VND</option>
+				  	<select class="mr-2 form-control select-dark">
+						<option value="0">100.000 đ</option>
+						<option value="50">100.000 đ</option>
+						<option value="100">100.000 đ</option>
+						<option value="150">100.000 đ</option>
+						<option value="200">100.000 đ</option>
+						<option value="500">100.000 đ</option>
+						<option value="1000">10.000.000 đ</option>
 					</select>
 				</div>
 				<div class="form-group text-right col-md-6">
 				  <label>Max</label>
-				  	<select class="mr-2 form-control">
-						<option value="0">100 000 VND</option>
-						<option value="50">100 000 VND</option>
-						<option value="100">100 000 VND</option>
-						<option value="150">100000VND</option>
-						<option value="200">100000VND</option>
-						<option value="500">100000VND</option>
-						<option value="1000">10 000 000VND</option>
+				  	<select class="mr-2 form-control select-dark">
+						<option value="0">100.000 đ</option>
+						<option value="50">100.000 đ</option>
+						<option value="100">100.000 đ</option>
+						<option value="150">100.000 đ</option>
+						<option value="200">100.000 đ</option>
+						<option value="500">100.000 đ</option>
+						<option value="1000">10.000.000 đ</option>
 					</select>
 				</div>
 				</div> <!-- form-row.// -->
@@ -92,7 +126,7 @@
 
 <header class="border-bottom mb-4 pb-3">
 		<div class="form-inline">
-			<span class="mr-md-auto"><b>{{products_count}}</b> Items found </span>
+			<span class="mr-md-auto"><b>{{products_count}}</b> Sự kiện được tìm thấy </span>
 			
 		</div>
 </header><!-- sect-heading -->
@@ -110,7 +144,7 @@
 				<div class="fix-height">
 					<a href="{{ product.get_url}}" class="title">{{product.product_name}}</a>
 					<div class="price-wrap mt-2">
-						<span class="price">{{product.price}}</span>
+						<span class="price">{{ product.price|vnd }}</span>
 					</div> <!-- price-wrap.// -->
 				</div>
 				{% if product.stock <= 0%}

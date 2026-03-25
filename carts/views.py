@@ -1,5 +1,6 @@
 import json
 
+from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import EmailMessage
 from django.db import transaction
@@ -29,23 +30,27 @@ def _get_or_create_cart(request):
 def _clear_cart(cart):
     CartItem.objects.filter(cart=cart).delete()
 
+@login_required(login_url='login')
 def add_cart(request, product_id):
 
     product = Product.objects.get(id=product_id) #get the product
     product_variation = [] 
-    if request.method == 'POST':
-        for item in request.POST:
-            key = item
-            value = request.POST[key]
-            print(key, value)
+    variation_source = request.POST if request.method == 'POST' else request.GET
+    for item in variation_source:
+        if item in ['csrfmiddlewaretoken']:
+            continue
+        key = item
+        value = variation_source.get(key)
+        if not value:
+            continue
 
-            try:
-                variation = Variation.objects.get(product=product, variation_category__iexact=key, variation_value__iexact=value)
-                product_variation.append(variation) #store this values inside a cart item 
-            except:
-                pass
+        try:
+            variation = Variation.objects.get(product=product, variation_category__iexact=key, variation_value__iexact=value)
+            product_variation.append(variation) #store this values inside a cart item 
+        except Variation.DoesNotExist:
+            pass
 
-    
+
     cart = _get_or_create_cart(request)
 
     existing_items = CartItem.objects.filter(cart=cart, is_active=True)
@@ -56,6 +61,7 @@ def add_cart(request, product_id):
     try:
         cart_item = CartItem.objects.get(product=product, cart=cart)
         if len(product_variation) > 0:
+            cart_item.variations.clear()
             for item in product_variation:
                 cart_item.variations.add(item)
         cart_item.quantity += 1
@@ -76,17 +82,13 @@ def add_cart(request, product_id):
 def checkout(request):
     total = 0
     quantity = 0
-    tax = 0
-    grand_total = 0
     cart_items = []
     try:
         cart = Cart.objects.get(cart_id=_cart_id(request))
         cart_items = CartItem.objects.filter(cart=cart, is_active=True)
         for cart_item in cart_items:
-            total += cart_item.product.price * cart_item.quantity
+            total += cart_item.sub_total()
             quantity += cart_item.quantity
-        tax = (total * 2) / 100
-        grand_total = total + tax
     except ObjectDoesNotExist:
         pass
 
@@ -94,8 +96,6 @@ def checkout(request):
         'cart_items': cart_items,
         'total': total,
         'quantity': quantity,
-        'tax': tax,
-        'grand_total': grand_total,
     }
     return render(request, 'store/checkout.html', context)
 
@@ -122,16 +122,12 @@ def remove_cart_item(request, product_id):
     return redirect('cart')
 
 def cart(request, total=0, quantity=0, cart_items=None):
-    tax = 0
-    grand_total = 0
     try:
         cart = Cart.objects.get(cart_id=_cart_id(request))# return a product
         cart_items = CartItem.objects.filter(cart=cart, is_active=True)# return all item 
         for cart_item in cart_items:
-            total += (cart_item.product.price * cart_item.quantity)
+            total += cart_item.sub_total()
             quantity += cart_item.quantity
-        tax = (total *2)/100
-        grand_total = total + tax
     except ObjectDoesNotExist:
         pass #just ignore
 
@@ -139,8 +135,6 @@ def cart(request, total=0, quantity=0, cart_items=None):
         'total': total,
         'quantity': quantity,
         'cart_items': cart_items,
-        'tax' : tax,
-        'grand_total': grand_total
     }
     return render(request, 'store/cart.html', context)
 
@@ -173,9 +167,7 @@ def complete_order(request):
             if not cart_items:
                 return JsonResponse({'status': 'error', 'message': 'Cart is empty.'}, status=400)
 
-            subtotal = sum(item.product.price * item.quantity for item in cart_items)
-            tax = round(subtotal * 0.02, 2)
-            grand_total = round(subtotal + tax, 2)
+            total = sum(item.sub_total() for item in cart_items)
 
             for item in cart_items:
                 product = Product.objects.select_for_update().get(id=item.product_id)
@@ -199,8 +191,8 @@ def complete_order(request):
                     last_name=request.user.last_name,
                     phone=getattr(request.user, 'phone_number', ''),
                     email=request.user.email,
-                    order_total=grand_total,
-                    tax=tax,
+                    order_total=total,
+                    tax=0,
                     status='Completed',
                     ip=request.META.get('REMOTE_ADDR', ''),
                     is_ordered=True,
@@ -210,7 +202,7 @@ def complete_order(request):
                         order=order,
                         product=item.product,
                         quantity=item.quantity,
-                        price=item.product.price,
+                        price=item.unit_price(),
                     )
 
             _clear_cart(cart)

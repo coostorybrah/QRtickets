@@ -1,7 +1,26 @@
 {% extends 'base.html' %}
 
-{% load static %}
+{% load static currency %}
 {% block content %}
+<style>
+	.cart-quantity-button,
+	.cart-quantity-button:hover,
+	.cart-quantity-button:focus {
+		background: #1f1f1f !important;
+		color: #f1f3f5 !important;
+		border-color: #323232 !important;
+		box-shadow: none !important;
+	}
+
+	.cart-quantity-input,
+	.cart-quantity-input:focus {
+		background: #111111 !important;
+		color: #ffffff !important;
+		border-color: #323232 !important;
+		box-shadow: none !important;
+		text-align: center;
+	}
+</style>
 <section class="section-content padding-y bg">
 <div class="container">
 
@@ -37,11 +56,6 @@
 			<div class="aside"><a href="{{cart_item.product.get_url}}"> <img src="{{cart_item.product.images.url}}" class="img-sm"> </a> </div>
 			<figcaption class="info">
 				<a href="{{cart_item.product.get_url}}" class="title text-dark">{{cart_item.product.product_name}}</a>
-				{% if cart_item.variations.all %}
-						{% for item in cart_item.variations.all %}
-							{{ item.variation_category | capfirst }} : {{ item.variation_value | capfirst }} <br>
-						{% endfor %}
-				{% endif %}
 			</figcaption>
 		</figure>
 	</td>
@@ -50,19 +64,19 @@
 					<div class="col"> 
 						<div class="input-group input-spinner">
 							<div class="input-group-prepend">
-							<a href = "{% url 'remove_cart' cart_item.product.id %}" class="btn btn-light" type="button" id="button-plus" data-preserve-cart="true"> <i class="fa fa-minus"></i> </a>
+							<a href = "{% url 'remove_cart' cart_item.product.id %}" class="btn cart-quantity-button" type="button" id="button-plus" data-preserve-cart="true"> <i class="fa fa-minus"></i> </a>
 							</div>
-							<input type="text" class="form-control"  value="{{cart_item.quantity}}">
+							<input type="text" class="form-control cart-quantity-input"  value="{{cart_item.quantity}}">
 							<div class="input-group-append">
-							<a href = "{% url 'add_cart' cart_item.product.id %}" class="btn btn-light" type="button" id="button-minus" data-preserve-cart="true"> <i class="fa fa-plus"></i> </a>
+							<a href = "{% url 'add_cart' cart_item.product.id %}" class="btn cart-quantity-button" type="button" id="button-minus" data-preserve-cart="true"> <i class="fa fa-plus"></i> </a>
 							</div>
 						</div> <!-- input-group.// -->
 					</div> <!-- col.// -->
 	</td>
 	<td> 
 		<div class="price-wrap"> 
-			<var class="price">{{cart_item.sub_total}} VND</var> 
-			<small class="text-muted">{{cart_item.product.price}} VND / vé</small> 
+			<var class="price text-white d-block" style="font-size: 1rem; font-weight: 500; line-height: 1.1;">{{ cart_item.sub_total|vnd }}</var> 
+			<small class="text-muted">{{ cart_item.unit_price|vnd }} / vé</small> 
 		</div> <!-- price-wrap .// -->
 	</td>
 	<td class="text-right"> 
@@ -80,16 +94,8 @@
 		<div class="card">
 		<div class="card-body">
 			<dl class="dlist-align">
-			  <dt>Tổng cộng:</dt>
-			  <dd class="text-right">{{total}} VND</dd>
-			</dl>
-			<dl class="dlist-align">
-			  <dt>VAT:</dt>
-			  <dd class="text-right">{{tax}} VND</dd>
-			</dl>
-			<dl class="dlist-align">
 			  <dt>Tổng tiền:</dt>
-			  <dd class="text-right text-dark b"><strong>{{grand_total}} VND</strong></dd>
+			  <dd class="text-right text-dark b"><strong>{{ total|vnd }}</strong></dd>
 			</dl>
 			<hr>
 			<p class="text-center mb-3">
@@ -113,7 +119,7 @@
 
 {% if total > 0 %}
 <script>
-	const amount = "{{ grand_total }}";
+	const amount = "{{ total }}";
 	let preserveCartOnExit = false;
 
 	function getCookie(name) {

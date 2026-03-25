@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load currency %}
 
 {% block content %}
 
@@ -28,8 +29,7 @@
 				<div class="card-body pb-0">
 					<div class="row">
 						<div class="col-md-6">
-					<p class="mb-1"><strong>Tổng tiền:</strong> {{ order.order_total }} VND</p>
-					<p class="mb-1"><strong>Thuế:</strong> {{ order.tax }} VND</p>
+					<p class="mb-1"><strong>Tổng tiền:</strong> {{ order.order_total|vnd }}</p>
 						</div>
 					</div>
 				</div>
@@ -65,8 +65,8 @@
 									</div>
 								</td>
 								<td>{{ item.quantity }}</td>
-							<td>{{ item.price }} VND</td>
-							<td>{{ item.sub_total }} VND</td>
+							<td>{{ item.price|vnd }}</td>
+							<td>{{ item.sub_total|vnd }}</td>
 							</tr>
 							{% endfor %}
 						</tbody>
