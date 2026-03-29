@@ -12,10 +12,15 @@
 
 <!-- MAIN -->
 {% block main %}
-
+<div class="my-tickets">
+    <h2>Vé của tôi</h2>
+    <div id="tickets"></div>
+</div>
 {% endblock %}
 
 <!-- SCRIPTS -->
 {% block scripts %}
-
+<script type="module" src="{% static 'js/vecuatoi.js' %}"></script>
 {% endblock %}
+
+
