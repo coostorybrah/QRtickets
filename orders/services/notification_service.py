@@ -8,15 +8,21 @@ def send_order_email(order_id):
     except Order.DoesNotExist:
         return
 
-    email = order.buyer_email
-    name = order.buyer_name
+    tickets = order.tickets.select_related("ticket_type__event")
+
+    message = f"Hello {order.buyer_name},\n\nYour tickets:\n\n"
+
+    for t in tickets:
+        message += (
+            f"- {t.ticket_type.event.name} | "
+            f"{t.ticket_type.name} | "
+            f"QR: {t.qr_code.url}\n"
+        )
 
     send_mail(
-        subject = "Your Ticket is Ready 🎫",
-        message = f"Hello {name}\nYour order {order.id} has been successfully paid. Your QR tickets are ready.",
-        from_email = "noreply@qrticket.com",
-        recipient_list = [email],
-        fail_silently = False,
+        subject="Your Ticket is Ready 🎫",
+        message=message,
+        from_email="noreply@qrticket.com",
+        recipient_list=[order.buyer_email],
+        fail_silently=False,
     )
-
-    print(f"[EMAIL] Sent to {email}")

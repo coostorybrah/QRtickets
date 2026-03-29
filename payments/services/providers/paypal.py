@@ -2,7 +2,7 @@
 import requests
 from django.conf import settings
 
-from payments.services.core import mark_order_paid, mark_order_failed, validate_order_amount
+from payments.utils import currency
 
 # GET ACCESS TOKEN
 def get_access_token():
@@ -28,7 +28,7 @@ def create_order(order):
         "Authorization": f"Bearer {access_token}"
     }
 
-    usd_total_price = convert_vnd_to_usd(order.get_total_price())
+    usd_total_price = currency.convert_vnd_to_usd(order.get_total_price())
     payload = {
         "intent": "CAPTURE",
         "purchase_units": [
@@ -61,36 +61,29 @@ def create_order(order):
 
     return None
 
-# WEBHOOK
-def handle_webhook(data, order):
-    """
-    Simplified PayPal webhook handler (we’ll expand later)
-    """
+# CAPTURE
+def capture_order(paypal_id):
+    access_token = get_access_token()
 
-    status = data.get("status")
-    amount = float(data.get("amount", 0))
+    url = f"{settings.PAYPAL_BASE_URL}/v2/checkout/orders/{paypal_id}/capture"
 
-    if order.status == "PAID":
-        return {"status": "ignored"}
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {access_token}"
+    }
 
-    if status != "COMPLETED":
-        mark_order_failed(order)
-        return {"status": "failed"}
+    response = requests.post(url, headers=headers)
 
-    if not validate_order_amount(order, amount):
-        return {"status": "invalid_amount"}
+    if response.status_code != 201:
+        print("[PAYPAL ERROR]", response.text)
+        return False
 
-    mark_order_paid(
-        order,
-        payment_id = data.get("payment_id"),
-        provider = "paypal"
-    )
+    data = response.json()
 
-    return {"status": "success"}
+    # Optional: validate status
+    if data.get("status") != "COMPLETED":
+        print("[PAYPAL NOT COMPLETED]", data)
+        return False
 
-def convert_vnd_to_usd(vnd_amount):
-    rate  =  26000  # 1 USD ≈ 24,000 VND
+    return True
 
-    usd = vnd_amount / rate
-
-    return round(usd, 2)

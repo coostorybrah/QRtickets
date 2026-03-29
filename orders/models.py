@@ -36,3 +36,19 @@ class OrderItem(models.Model):
     quantity = models.IntegerField(default=1)
 
     qr_code = models.ImageField(upload_to="qrcodes/", null=True, blank=True)
+
+class Ticket(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="tickets")
+
+    order_item = models.ForeignKey(
+        OrderItem,
+        on_delete=models.CASCADE,
+        related_name="tickets"
+    )
+
+    ticket_type = models.ForeignKey("events.TicketType", on_delete=models.CASCADE)
+
+    qr_code = models.ImageField(upload_to="qrcodes/")
+    is_used = models.BooleanField(default=False)
+
+    created_at = models.DateTimeField(auto_now_add=True)

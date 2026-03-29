@@ -1,61 +1,38 @@
-<h2>ĐANG XỬ LÝ...</h2>
+<h2>ĐANG XÁC NHẬN THANH TOÁN...</h2>
 
 <script>
-(async function () {
-    const params = new URLSearchParams(window.location.search);
+    (async function () {
+        const params = new URLSearchParams(window.location.search);
+        const paypalId = params.get("token");
 
-    // PayPal gives you token (paypal order id)
-    const paypalId = params.get("token");
-
-    if (!paypalId) {
-        window.location.href = "/orders-failed/";
-        return;
-    }
-
-    try {
-        // 🔥 Find order by paypal_id (we stored it earlier)
-        const res = await fetch(`/api/payments/find-order/?paypal_id=${paypalId}`, {
-            headers: {
-                "Authorization": `Bearer ${localStorage.getItem("access")}`
-            }
-        });
-
-        const data = await res.json();
-
-        const orderId = data.order_id;
-
-        // 🔁 Poll order status
-        let attempts = 0;
-
-        while (attempts < 10) {
-            const statusRes = await fetch(`/api/orders/${orderId}/status/`, {
-                headers: {
-                    "Authorization": `Bearer ${localStorage.getItem("access")}`
-                }
-            });
-
-            const statusData = await statusRes.json();
-
-            if (statusData.status === "PAID") {
-                window.location.href = "/my-tickets/";
-                return;
-            }
-
-            if (statusData.status === "CANCELLED") {
-                window.location.href = "/orders-failed/";
-                return;
-            }
-
-            await new Promise(r => setTimeout(r, 1500));
-            attempts++;
+        if (!paypalId) {
+            window.location.href = "/orders-failed/";
+            return;
         }
 
-        // timeout fallback
-        window.location.href = "/my-tickets/";
+        try {
+            const res = await fetch("/api/payments/verify/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${localStorage.getItem("access")}`
+                },
+                body: JSON.stringify({
+                    paypal_id: paypalId
+                })
+            });
 
-    } catch (err) {
-        console.error(err);
-        window.location.href = "/orders-failed/";
-    }
-})();
+            const data = await res.json();
+
+            if (data.status === "paid" || data.status === "already_paid") {
+                window.location.href = "/my-tickets/";
+            } else {
+                window.location.href = "/orders-failed/";
+            }
+
+        } catch (err) {
+            console.error(err);
+            window.location.href = "/orders-failed/";
+        }
+    })();
 </script>

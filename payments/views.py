@@ -1,5 +1,4 @@
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
+from django.db import transaction
 
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -7,39 +6,41 @@ from rest_framework.response import Response
 
 from orders.models import Order
 from payments.services.core import mark_order_paid
+from payments.services.manager import capture_payment
 
-import json
 
-@csrf_exempt
-def paypal_webhook(request):
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def verify_payment(request):
+    paypal_id = request.data.get("paypal_id")
+
+    if not paypal_id:
+        return Response({"error": "Missing paypal_id"}, status=400)
+
     try:
-        data = json.loads(request.body)
-    except Exception:
-        return JsonResponse({"error": "invalid json"}, status=400)
-
-    event_type = data.get("event_type")
-
-    if event_type == "CHECKOUT.ORDER.APPROVED":
-        resource = data.get("resource", {})
-        paypal_id = resource.get("id")
-
-        try:
-            order = Order.objects.get(
+        with transaction.atomic():
+            order = Order.objects.select_for_update().get(
                 payment_id=paypal_id,
-                payment_provider="paypal"
+                user=request.user
             )
-        except Order.DoesNotExist:
-            return JsonResponse({"error": "order not found"}, status=404)
 
-        mark_order_paid(
-            order,
-            payment_id=paypal_id,
-            provider="paypal"
-        )
+            if order.status == "PAID":
+                return Response({"status": "already_paid", "order_id": order.id})
 
-        print("✅ ORDER MARKED PAID:", order.id)
+            success = capture_payment(order, "paypal")
 
-    return JsonResponse({"status": "ok"})
+            if not success:
+                return Response({"error": "Capture failed"}, status=400)
+
+            mark_order_paid(order, payment_id=paypal_id, provider="paypal")
+
+    except Order.DoesNotExist:
+        return Response({"error": "Order not found"}, status=404)
+
+    return Response({
+        "status": "paid",
+        "order_id": order.id
+    })
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])

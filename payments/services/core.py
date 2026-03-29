@@ -15,6 +15,11 @@ def mark_order_paid(order: Order, payment_id=None, provider=None):
         order.payment_provider = provider
         order.paid_at = timezone.now()
         order.save()
+        
+        for item in order.items.select_related("ticket_type"):
+            ticket_type = item.ticket_type
+            ticket_type.quantity_sold += item.quantity
+            ticket_type.save()
 
     EventBus.publish("order_paid", {"order_id": order.id})
 
