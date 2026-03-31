@@ -1,4 +1,6 @@
-# DATABASE SETUP GUIDE
+# SETUP GUIDE
+
+## 1. DATABASE
 
 Sau khi mở venv và cùng môi trường thì chạy: python manage.py setup_db --reset
 
@@ -7,7 +9,13 @@ Sau khi mở venv và cùng môi trường thì chạy: python manage.py setup_d
 ✅ Database seeded successfully
 ✅ Database setup complete!
 
-## Lưu ý
+### Lưu ý
 
 - Nếu không thấy cả 2 dòng trên thì chụp ảnh báo lại.
 - Chỉ cần setup một lần sau khi pull.
+
+## 2. EMAIL HOST VÀ NGROK
+
+- EMAIL HOST: Làm nhập thông tin theo file zalo
+
+- NGROK: Tự tạo tài khoản trên ngrok.com. Tự chạy trên terminal ngoài rồi copy DOMAIN vào file qrticket/settings.py (cuối file). (vd: alda-unmobilized-contributively.ngrok-free.dev).
