@@ -134,4 +134,4 @@ Xem QRticket_ERD(final).png.
 - Tìm kiếm sự kiện bằng từ khóa (header), sau đó truy vấn sâu hơn bằng filter.
 - CHÚ Ý:
 - - Nút reset trong filter chỉ reset duy nhất filter.
-- - Nếu muốn reset toàn bộ kết quả tìm kiếm thì bấm nút tìm kiếm thông tin rỗng ở header.
+- - Nếu muốn reset toàn bộ kết quả tìm kiếm thì tìm kiếm thông tin rỗng qua search bar (header).
