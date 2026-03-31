@@ -170,4 +170,4 @@ PAYPAL_CLIENT_SECRET = "YOUR KEY"
 PAYPAL_BASE_URL = "https://api-m.sandbox.paypal.com"
 
 # ngrok URL
-BASE_URL = "unabolishable-subautomatically-rod.ngrok-free.dev"
+BASE_URL = "YOUR NGROK URL"
