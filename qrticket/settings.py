@@ -12,10 +12,13 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+load_dotenv(BASE_DIR / ".env")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
@@ -156,18 +159,18 @@ EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-EMAIL_HOST_USER = "qrticket.noreply@gmail.com"
-EMAIL_HOST_PASSWORD = "HOST PASSWORD"
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 
-DEFAULT_FROM_EMAIL = "QRticket <qrticket.noreply@gmail.com>"
+DEFAULT_FROM_EMAIL = f"QRticket <{EMAIL_HOST_USER}>"
 
 # PAYPAL CONFIG
-PAYPAL_CLIENT_ID = "YOUR PAYPAL CLIENT ID"
-PAYPAL_CLIENT_SECRET = "YOUR PAYPAL KEY"
+PAYPAL_CLIENT_ID = os.getenv("PAYPAL_CLIENT_ID")
+PAYPAL_CLIENT_SECRET = os.getenv("PAYPAL_CLIENT_SECRET")
 
 # sandbox vs live
 PAYPAL_BASE_URL = "https://api-m.sandbox.paypal.com"
 
 # ngrok URL
 # RUN IN EXTERNAL TERMINAL: "ngrok http 8000" and copy the https link (remove the "https://")
-BASE_URL = "YOUR NGROK URL" 
+BASE_URL = os.getenv("BASE_URL") 

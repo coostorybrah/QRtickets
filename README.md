@@ -116,13 +116,13 @@ Xem QRticket_ERD(final).png.
 
 - - Gồm thanh toán qua paypal (sandbox) và card (KHÔNG LÀM card).
 
-- - Tài khoản thử nghiệm paypal: Tự tạo tài khoản sandbox. Điền thông tin vào qrticket/settings.py (cuối file). Khi thử nghiệm mua hàng thì dùng test accounts.
+- - Tài khoản thử nghiệm paypal: Tự tạo tài khoản sandbox. Điền thông tin vào file .env (tự tạo). Khi thử nghiệm mua hàng thì dùng test accounts.
 
 ### 5. THÔNG BÁO NGƯỜI MUA
 
 - Gửi email cho người mua bao gồm tên người mua và file pdf có ảnh QR cho từng vé.
 
-- Email backend: Vào qrticket/settings.py, xuống cuối file và điền thông tin.
+- Email host: Nhập host password vào .env (như VD_env.png).
 
 ### 6. QUÉT VÉ
 

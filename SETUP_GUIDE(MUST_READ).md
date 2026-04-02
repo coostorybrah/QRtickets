@@ -17,10 +17,10 @@ Sau khi mở venv và cùng môi trường thì chạy: python manage.py setup_d
 
 ## 2. EMAIL HOST VÀ NGROK
 
-- EMAIL HOST: Làm nhập thông tin theo file zalo
+- EMAIL HOST: Nhập thông tin theo file zalo
 
 - NGROK:
 
 - - Tự tạo tài khoản trên ngrok.com.
 
-- - Tự chạy trên terminal ngoài rồi copy DOMAIN vào file qrticket/settings.py (cuối file). (vd: alda-unmobilized-contributively.ngrok-free.dev).
+- - Tự chạy trên terminal ngoài rồi copy url vào file .env.

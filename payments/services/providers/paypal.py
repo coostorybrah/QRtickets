@@ -41,8 +41,8 @@ def create_order(order):
             }
         ],
         "application_context": {
-            "return_url": f"https://{settings.BASE_URL}/payment-return/",
-            "cancel_url": f"https://{settings.BASE_URL}/orders-failed/"
+            "return_url": f"{settings.BASE_URL}/payment-return/",
+            "cancel_url": f"{settings.BASE_URL}/orders-failed/"
         }
     }
 
