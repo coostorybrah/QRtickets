@@ -7,6 +7,7 @@ Sau khi mở venv và cùng môi trường thì chạy: python manage.py setup_d
 Đợi setup, không đụng tay vào terminal, nếu vô tình hủy setup thì chạy lại code, tiếp tục làm việc như bình thường sau khi thấy 2 dòng này:
 
 ✅ Database seeded successfully
+
 ✅ Database setup complete!
 
 ### Lưu ý
@@ -18,4 +19,8 @@ Sau khi mở venv và cùng môi trường thì chạy: python manage.py setup_d
 
 - EMAIL HOST: Làm nhập thông tin theo file zalo
 
-- NGROK: Tự tạo tài khoản trên ngrok.com. Tự chạy trên terminal ngoài rồi copy DOMAIN vào file qrticket/settings.py (cuối file). (vd: alda-unmobilized-contributively.ngrok-free.dev).
+- NGROK:
+
+- - Tự tạo tài khoản trên ngrok.com.
+
+- - Tự chạy trên terminal ngoài rồi copy DOMAIN vào file qrticket/settings.py (cuối file). (vd: alda-unmobilized-contributively.ngrok-free.dev).

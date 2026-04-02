@@ -127,11 +127,23 @@ Xem QRticket_ERD(final).png.
 ### 6. QUÉT VÉ
 
 - Sau khi đăng nhập, BTC truy cập scanner qua nút "Quét vé". (nằm ở header, chỉ BTC mới có);
-- BTC chỉ có thể quét vé cho sự kiện do bản thân tổ chức.
+
+- Vé chỉ quét được một lần.
+
+- Sau khi quét, backend cập nhật trạng thái vé trong database, frontend sẽ hiển thị trạng thái mới của vé.
+
+- CHÚ Ý:
+
+- - Để xem trạng thái vé, user vào trang "Vé của tôi" (nếu lúc quét vé xong mà người dùng đang ở page, refresh page để thấy trạng thái vé được cập nhật).
+
+- - BTC chỉ có thể quét vé cho sự kiện do bản thân tổ chức.
 
 ### 7. TÌM KIẾM
 
 - Tìm kiếm sự kiện bằng từ khóa (header), sau đó truy vấn sâu hơn bằng filter.
+
 - CHÚ Ý:
+
 - - Nút reset trong filter chỉ reset duy nhất filter.
+
 - - Nếu muốn reset toàn bộ kết quả tìm kiếm thì tìm kiếm thông tin rỗng qua search bar (header).
