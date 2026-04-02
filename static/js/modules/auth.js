@@ -72,5 +72,5 @@ export function initLogin(){
 
 export function logout() {
     clearTokens();
-    window.location.href = "/"; // or "/login/"
+    window.location.href = "/";
 }

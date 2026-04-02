@@ -92,7 +92,7 @@ Xem QRticket_ERD(final).png.
 
 - - Khi chưa đăng nhập, api kiểm tra thông tin người dùng báo lỗi là điều bình thường (Vì không có người dùng).
 
-#### 2. ĐĂNG KÝ
+### 2. ĐĂNG KÝ
 
 - Tùy ý, không thể đăng ký tạo tài khoản admin.
 

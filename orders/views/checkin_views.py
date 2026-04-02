@@ -47,9 +47,9 @@ def api_check_in_ticket(request):
     already_used = ticket.is_used
 
     CheckInLog.objects.create(
-        ticket=ticket,
-        scanned_by=request.user,
-        success=not already_used
+        ticket = ticket,
+        scanned_by = request.user.organizer.id,
+        success = not already_used
     )
 
     if already_used:

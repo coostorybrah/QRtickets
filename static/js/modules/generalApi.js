@@ -1,7 +1,5 @@
 import { getAccessToken, getRefreshToken, setTokens, clearTokens } from "./token.js";
 
-let isRefreshing = false;
-
 // PUBLIC REQUEST (no JWT)
 export async function publicFetch(url, options = {}) {
     const headers = {
@@ -18,8 +16,6 @@ export async function publicFetch(url, options = {}) {
 }
 
 // PROTECTED REQUEST (JWT)
-
-
 export async function apiFetch(url, options = {}) {
     let token = getAccessToken();
 
@@ -64,39 +60,41 @@ export async function apiFetch(url, options = {}) {
 }
 
 // REFRESH TOKEN
+let refreshPromise = null;
+
 async function refreshAccessToken() {
-    if (isRefreshing) return null;
-
-    isRefreshing = true;
-
-    try {
-        const refresh = getRefreshToken();
-
-        if (!refresh) return null;
-
-        const res = await fetch("/api/token/refresh/", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ refresh }),
-        });
-
-        if (!res.ok) return null;
-
-        const data = await res.json();
-
-        setTokens({
-            access: data.access,
-            refresh,
-        });
-
-        return data.access;
-
-    } catch (err) {
-        console.error("Refresh failed", err);
-        return null;
-    } finally {
-        isRefreshing = false;
+    if (refreshPromise) {
+        return refreshPromise;
     }
+
+    refreshPromise = (async () => {
+        try {
+            const refresh = getRefreshToken();
+            if (!refresh) return null;
+
+            const res = await fetch("/api/token/refresh/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ refresh }),
+            });
+
+            if (!res.ok) return null;
+
+            const data = await res.json();
+
+            setTokens({
+                access: data.access,
+                refresh,
+            });
+
+            return data.access;
+        } catch (err) {
+            console.error("Refresh failed", err);
+            return null;
+        } finally {
+            refreshPromise = null;
+        }
+    })();
+
+    return refreshPromise;
 }
