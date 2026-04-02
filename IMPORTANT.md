@@ -18,4 +18,4 @@
 
 - - Bước 3: Nhập thông tin email host, paypal client và ngrok giống như khi nhập vào file settings và lưu lại (xem ví dụ VD_env.png).
 
-- CHÚ Ý: File .gitignore và settings.py đã được viết lại để phối hợp với file .env không cần đụng tay vào file.
+- CHÚ Ý: File .gitignore và settings.py đã được viết lại để phối hợp với file .env nên không cần đụng tay vào 2 file này.
