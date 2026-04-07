@@ -287,11 +287,11 @@ header .others__modalTrigger {
 }
 .login__body form {
   width: 100%;
-  min-height: 150px;
+  min-height: 203px;
   padding-top: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 .login__body form .login-info {
