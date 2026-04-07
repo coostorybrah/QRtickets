@@ -50,7 +50,7 @@ def api_login(request):
     data = request.data
 
     identifier = data.get("username")
-    identifier = identifier.lower()
+    identifier = identifier.strip().lower()
     password = data.get("password")
 
     user_obj = User.objects.filter(
