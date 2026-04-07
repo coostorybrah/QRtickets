@@ -48,7 +48,7 @@ def api_check_in_ticket(request):
 
     CheckInLog.objects.create(
         ticket = ticket,
-        scanned_by = request.user.organizer.id,
+        scanned_by = request.user,
         success = not already_used
     )
 
