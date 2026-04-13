@@ -29,33 +29,28 @@ def api_check_in_ticket(request):
             "ticket_type__event__organizer"
         ).get(id=ticket_id)
     except Ticket.DoesNotExist:
-        return Response({"error": "Invalid ticket"}, status=404)
+        return Response({"error": "VÉ KHÔNG HỢP LỆ!"}, status=404)
 
     event = ticket.ticket_type.event
 
-    # 🔥 Ownership check
+    # Ownership check
     if not hasattr(request.user, "organizer"):
-        return Response({"error": "Not an organizer"}, status=403)
+        return Response({"error": "Not an organizer!"}, status=403)
 
     if event.organizer_id != request.user.organizer.id:
-        return Response({"error": "Not allowed for this event"}, status=403)
+        return Response({"error": "VÉ TỪ SỰ KIỆN KHÁC!"}, status=403)
 
-    # ❌ Already used
+    # Already used
     if ticket.is_used:
-        return Response({"error": "Ticket already used"}, status=400)
-
-    already_used = ticket.is_used
+        return Response({"error": "VÉ ĐÃ ĐƯỢC SỬ DỤNG!"}, status=400)
 
     CheckInLog.objects.create(
         ticket = ticket,
         scanned_by = request.user,
-        success = not already_used
+        success = ticket.is_used
     )
 
-    if already_used:
-        return Response({"error": "Ticket already used"}, status=400)
-
-    # ✅ Mark used
+    # Mark used
     ticket.is_used = True
     ticket.save()
     

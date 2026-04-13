@@ -27,6 +27,7 @@ export async function protectedFetch(url, options = {}) {
             ...(options.headers || {}),
         };
 
+        
         if (!(options.body instanceof FormData)) {
             headers["Content-Type"] = "application/json";
         }
@@ -57,9 +58,15 @@ export async function protectedFetch(url, options = {}) {
     }
 
     if (!res.ok) {
-        const text = await res.text();
-        console.error("API ERROR:", res.status, text);
-        throw new Error("Request failed");
+        let errorData;
+
+        try {
+            errorData = await res.json();
+        } catch {
+            errorData = { error: "Unknown error" };
+        }
+
+        throw errorData;
     }
 
     return await res.json();

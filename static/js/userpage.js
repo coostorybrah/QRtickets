@@ -51,14 +51,10 @@ export function initAvatarUpload() {
         wrapper.classList.add("uploading");
 
         try {
-            const res = await protectedFetch("/api/user/avatar/", {
+            const data = await protectedFetch("/api/user/avatar/", {
                 method: "POST",
                 body: formData,
             });
-
-            if (!res.ok) throw new Error("Upload failed");
-
-            const data = await res.json();
 
             if (data.success) {
                 location.reload();

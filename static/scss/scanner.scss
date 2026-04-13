@@ -91,6 +91,7 @@ $video_size: 320px;
 /* result */
 #result {
     margin-top: 16px;
+    font-size: larger;
     font-weight: bold;
     text-align: center;
 }
@@ -100,7 +101,7 @@ $video_size: 320px;
 }
 
 #result.error {
-    color: #e74c3c;
+    color: #f33c27;
 }
 
 /* optional: dark overlay */

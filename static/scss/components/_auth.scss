@@ -73,9 +73,11 @@ $avatar_size: 32px;
 }
 
 #avatarHeader {
+    display: block;
+
     background: black;
     width: $avatar_size;
-    aspect-ratio: 1/1;
+    height: $avatar_size;
 
     border: 2px solid white;
     border-radius: 50%;

@@ -449,9 +449,10 @@ header .others__modalTrigger {
 }
 
 #avatarHeader {
+  display: block;
   background: black;
   width: 32px;
-  aspect-ratio: 1/1;
+  height: 32px;
   border: 2px solid white;
   border-radius: 50%;
   object-fit: cover;

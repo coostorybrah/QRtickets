@@ -6,37 +6,28 @@ from django.contrib.auth import get_user_model
 import uuid
 import os
 
+from users.services.avatar_service import process_avatar_upload
+
 User = get_user_model()
 
 # UPLOAD AVATAR
+from users.services.avatar_service import process_avatar_upload
+
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def api_upload_avatar(request):
-    user = request.user
-    file = request.FILES.get("avatar")
+    try:
+        file = request.FILES.get("avatar")
 
-    if not file:
-        return Response({"error": "No file uploaded"}, status=400)
+        avatar_url = process_avatar_upload(request.user, file)
 
-    if not file.content_type.startswith("image/"):
-        return Response({"error": "Invalid file type"}, status=400)
+        return Response({
+            "success": True,
+            "avatar": avatar_url
+        })
 
-    if file.size > 2 * 1024 * 1024:
-        return Response({"error": "File too large (max 2MB)"}, status=400)
-
-    if user.avatar and user.avatar.name != "avatars/default-avatar.png":
-        user.avatar.delete(save=False)
-
-    ext = os.path.splitext(file.name)[1]
-    file.name = f"{uuid.uuid4()}{ext}"
-
-    user.avatar = file
-    user.save()
-
-    return Response({
-        "success": True,
-        "avatar": user.avatar.url
-    })
+    except ValueError as e:
+        return Response({"error": str(e)}, status=400)
 
 # CHANGE USERNAME
 @api_view(["PATCH"])

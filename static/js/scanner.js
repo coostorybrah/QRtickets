@@ -57,16 +57,17 @@ function startScanner() {
                     setResult(resultEl, "Vé không hợp lệ", "error");
                 }
 
-            } catch (err) {
+            }
+            catch (err) {
                 console.error(err);
-                setResult(resultEl, "Lỗi kiểm tra vé", "error");
+                const message = err?.error || err?.message || "Lỗi kiểm tra vé";
+                setResult(resultEl, message, "error");
             }
 
             setTimeout(() => {
                 resetScanner(resultEl);
             }, 2500);
         },
-        () => {}
     );
 }
 

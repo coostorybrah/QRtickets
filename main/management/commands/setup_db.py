@@ -36,6 +36,30 @@ def delete_migration_files(stdout):
                     stdout.write(f"🗑️ Deleted {file_path}")
                 except Exception as e:
                     stdout.write(f"⚠️ Could not delete {file_path}: {e}")
+                    
+def clean_media_folder(stdout):
+    media_root = settings.MEDIA_ROOT
+
+    if not os.path.exists(media_root):
+        stdout.write("ℹ️ MEDIA_ROOT does not exist, skipping cleanup.")
+        return
+
+    for item in os.listdir(media_root):
+        item_path = os.path.join(media_root, item)
+
+        # ❌ Skip important placeholder files if needed
+        if item in ["default.png", ".gitkeep"]:
+            continue
+
+        try:
+            if os.path.isfile(item_path) or os.path.islink(item_path):
+                os.remove(item_path)
+                stdout.write(f"🗑️ Deleted file {item_path}")
+            elif os.path.isdir(item_path):
+                shutil.rmtree(item_path)
+                stdout.write(f"🗑️ Deleted folder {item_path}")
+        except Exception as e:
+            stdout.write(f"⚠️ Could not delete {item_path}: {e}")
             
 class Command(BaseCommand):
     help = "Setup database (makemigrations + migrate + seed)"
@@ -61,7 +85,13 @@ class Command(BaseCommand):
 
             # 🧹 Delete migration files
             self.stdout.write(self.style.WARNING("🧹 Deleting migration files..."))
+        
             delete_migration_files(self.stdout)
+
+            # 🧹 Clean media files
+            self.stdout.write(self.style.WARNING("🧹 Cleaning media folder..."))
+
+            clean_media_folder(self.stdout)
 
         # 🆕 MAKE MIGRATIONS
         self.stdout.write("🛠️ Making migrations...")
