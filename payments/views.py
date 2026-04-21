@@ -12,7 +12,7 @@ from payments.services.manager import capture_payment
 
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
-def verify_payment(request):
+def api_verify_payment(request):
     paypal_id = request.data.get("paypal_id")
 
     if not paypal_id:
